@@ -17,8 +17,16 @@ public class MainRunner {
 		llRandom.printNormalOrder();
 		llRandom.printRandomOrder();
 
-		LinkedListWithRandomPointer<Integer> clonedLL = llRandom.clone();
+		//LinkedListWithRandomPointer<Integer> clonedLL = llRandom.clone();
+		LinkedListWithRandomPointer<Integer> clonedLL = llRandom.cloneWithoutExtraSpace();
 		clonedLL.printNormalOrder();
 		clonedLL.printRandomOrder();
+
+		/*
+		 * The linked list in normal order is :
+			1 2 3 4 5
+			The linked list in Random order is :
+			1 3 5 4 2
+		 */
 	}
 }

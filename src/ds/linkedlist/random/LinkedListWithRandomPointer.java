@@ -97,8 +97,6 @@ public class LinkedListWithRandomPointer <Type>
 	{
 		System.out.println("The linked list in Random order is : ");
 		Node<Type> iter = this.head;
-		if(iter.random == null && this.size() > 1) // First note randon is null move to next
-			iter = iter.next;
 		while(iter != null)
 		{
 			System.out.print(iter.data +" ");
@@ -137,6 +135,45 @@ public class LinkedListWithRandomPointer <Type>
 		{
 			map.get(originalNode).random = map.get( originalNode.random );
 			originalNode = originalNode.next;
+		}
+		return clonedList;
+	}
+
+	/**
+	 * Task:
+	 * 	Makes a copy of the random pointer linked list.
+	 * Approach :
+	 * 	Copy the normal pointer and keep the
+	 * 		mapping of original to  new node by connecting
+	 * 		next of 1st list and random of 2nd list with each other.
+	 * 	Then iterate again and fix the
+	 * 		random pointer of 2nd list and
+	 * 		the next pointer of first list.
+	 */
+	public LinkedListWithRandomPointer <Type> cloneWithoutExtraSpace()
+	{
+		Node<Type> originalNode = this.head;
+		LinkedListWithRandomPointer <Type> clonedList = new LinkedListWithRandomPointer<Type>();
+		Node<Type> clonedNode = null;
+
+		// Loop for normal pointer and linking the two list
+		while(originalNode!=null)
+		{
+			clonedNode = new Node<Type>(originalNode.data);
+			clonedList.insert.end(clonedNode);
+			Node<Type> nextNode = originalNode.next;
+			originalNode.next = clonedNode;
+			clonedNode.random = originalNode;
+			originalNode = nextNode;
+		}
+
+		originalNode = this.head;
+		// Loop for linking random pointer
+		while(originalNode != null)
+		{
+			originalNode.next.random = (originalNode.random!=null)?originalNode.random.next:null;
+			originalNode.next = (originalNode.next!=null)?originalNode.next.next:null;
+			originalNode = originalNode.random;
 		}
 		return clonedList;
 	}
