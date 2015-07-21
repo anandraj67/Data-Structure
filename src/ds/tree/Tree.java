@@ -708,7 +708,7 @@ public class Tree<Type>
 	{
 		if(root!=null)
 		{
-			path.insert.end(root);
+			path.insert.end(new ds.linkedlist.singly.Node<Node<Type>>(root));
 			if(root.left == null && root.right == null)
 			{
 				ds.linkedlist.singly.Node<Node<Type>> iterator = path.head;
