@@ -187,17 +187,6 @@ public class LinkedList <Type>
 		}
 		return iterBig;
 	}
-	public void printNormalOrder()
-	{
-		System.out.println("The linked list in normal order is : ");
-		Node<Type> iter = this.head;
-		while(iter != null)
-		{
-			System.out.print(iter.data +" ");
-			iter = iter.next;
-		}
-		System.out.println(" ");
-	}
 
 	public void printRandomOrder()
 	{
@@ -282,6 +271,31 @@ public class LinkedList <Type>
 			originalNode = originalNode.random;
 		}
 		return clonedList;
+	}
+
+	/**
+	 * @Sawal
+	 * 	Reverse a linked list with iteration
+	 * @Jawab
+	 * 	Take three pointer to null first and second
+	 * 	Reverse pointer of first and second
+	 *	Increment all three.
+	 */
+	public void reverseIteration()
+	{
+		Node<Type> first = null;
+		Node<Type> second = this.head;
+		Node<Type> third;
+
+		while(second !=null) 		// because connection of second and
+		{							// first is to be reversed
+			third = second.next;
+			second.next = first;
+
+			first = second;		// Increment
+			second = third;
+		}
+		this.head = first;
 	}
 
 }

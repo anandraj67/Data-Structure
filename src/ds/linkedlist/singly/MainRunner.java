@@ -46,10 +46,10 @@ public class MainRunner {
 		llRandom.head.next.next.next.next.random = llRandom.head.next.next.next;
 		llRandom.head.next.next.next.random = llRandom.head.next;
 		llRandom.head.next.random = null;
-		llRandom.printNormalOrder();
+		llRandom.print(); //NormalOrder
 		llRandom.printRandomOrder();
 		LinkedList<Integer> clonedLL = llRandom.cloneWithoutHashMap();
-		clonedLL.printNormalOrder();
+		clonedLL.print(); //NormalOrder
 		clonedLL.printRandomOrder();
 
 	}
@@ -63,16 +63,31 @@ public class MainRunner {
 		llRandom.head.next.next.next.next.random = llRandom.head.next.next.next;
 		llRandom.head.next.next.next.random = llRandom.head.next;
 		llRandom.head.next.random = null;
-		llRandom.printNormalOrder();
+		llRandom.print(); //NormalOrder
 		llRandom.printRandomOrder();
 		LinkedList<Integer> clonedLL = llRandom.cloneWithHashMapHelp();
-		clonedLL.printNormalOrder();
+		clonedLL.print(); //NormalOrder
 		clonedLL.printRandomOrder();
 
 	}
 
+	public static void  reverseIterationRunner() {
+		LinkedList<Integer> linkedList = new LinkedList<Integer>();
+		linkedList.insert.end(new Node<Integer>(1));
+		linkedList.insert.end(new Node<Integer>(2));
+		linkedList.insert.end(new Node<Integer>(3));
+		linkedList.insert.end(new Node<Integer>(4));
+		linkedList.insert.end(new Node<Integer>(5));
+		linkedList.insert.end(new Node<Integer>(6));
+		linkedList.insert.end(new Node<Integer>(7));
+		linkedList.print();
+		linkedList.reverseIteration();
+		System.out.println("After reversal");
+		linkedList.print();
+	}
+
 	public static void main(String[] args)
 	{
-		getIntersectionPointRunner();
+		reverseIterationRunner();
 	}
 }
