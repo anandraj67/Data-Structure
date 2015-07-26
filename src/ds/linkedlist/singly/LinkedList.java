@@ -303,4 +303,70 @@ public class LinkedList <Type>
 		this.head = first;
 	}
 
+	/**
+	 * @Sawal
+	 * 	Reverse a linked list with Recursion
+	 * @Jawab
+	 * 	Base case : null or single node.
+	 * 	Recursively call for next node.
+	 *	After returning link reversed last to node
+	 *		and  node to null.
+	 *	Every recursive step is returning head of reversed.
+	 */
+	private Node<Type> reverseRecurssion_(Node<Type> node)
+	{
+		if(node == null || node.next == null) 	// Base case
+			return node;
+		Node<Type> nodeReturned = reverseRecurssion_(node.next);
+		node.next.next = node;
+		node.next =null;
+		return nodeReturned;
+	}
+	public void reverseRecurssion()
+	{
+		this.head = reverseRecurssion_(this.head);
+	}
+	/**
+	 * @Sawal
+	 *  Reverse linked list in chunk
+	 * @Jawab
+	 *  3 pointers for internal reversal.
+	 *  At the end of 2nd chunk. 1st and 2nd will be connected.
+	 *  So keeping 2 chunkVariables.
+	 */
+	public void reverseInChunkIterIter(int chunkSize)
+	{
+		Node<Type> first = null;
+		Node<Type> second = this.head;
+		Node<Type> third ;
+		Node<Type> chunkFirst=this.head ;
+		Node<Type> chunkSecond = null;
+		int k = chunkSize;
+		boolean isFirstPass = true;
+		// (1 2 3) (4 5 6) (7 8 9 ) 8 3
+		while(second != null)
+		{
+			third = second.next;
+			second.next = first;
+			first = second;
+			second = third;
+			k--;
+			if(k==0 || second == null)
+			{
+				if(isFirstPass == true)
+				{
+					this.head = first;
+					isFirstPass = false;
+				}
+				else
+				{
+					chunkFirst.next = first;
+					chunkFirst = chunkSecond;
+				}
+				chunkSecond = second;
+				k = chunkSize;
+				first = null;
+			}
+		}
+	}
 }

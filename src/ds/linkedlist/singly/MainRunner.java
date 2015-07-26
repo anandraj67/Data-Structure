@@ -70,7 +70,6 @@ public class MainRunner {
 		clonedLL.printRandomOrder();
 
 	}
-
 	public static void  reverseIterationRunner() {
 		LinkedList<Integer> linkedList = new LinkedList<Integer>();
 		linkedList.insert.end(new Node<Integer>(1));
@@ -85,9 +84,39 @@ public class MainRunner {
 		System.out.println("After reversal");
 		linkedList.print();
 	}
+	public static void  reverseRecurssionRunner() {
+		LinkedList<Integer> linkedList = new LinkedList<Integer>();
+		linkedList.insert.end(new Node<Integer>(1));
+		linkedList.insert.end(new Node<Integer>(2));
+		linkedList.insert.end(new Node<Integer>(3));
+		linkedList.insert.end(new Node<Integer>(4));
+		linkedList.insert.end(new Node<Integer>(5));
+		linkedList.insert.end(new Node<Integer>(6));
+		linkedList.insert.end(new Node<Integer>(7));
+		linkedList.print();
+		linkedList.reverseRecurssion();
+		System.out.println("After reversal");
+		linkedList.print();
+	}
+	public static void  reverseInChunkIterIterRunner() {
+		LinkedList<Integer> linkedList = new LinkedList<Integer>();
+		linkedList.insert.end(new Node<Integer>(1));
+		linkedList.insert.end(new Node<Integer>(2));
+		linkedList.insert.end(new Node<Integer>(3));
+		linkedList.insert.end(new Node<Integer>(4));
+		linkedList.insert.end(new Node<Integer>(5));
+		linkedList.insert.end(new Node<Integer>(6));
+		linkedList.insert.end(new Node<Integer>(7));
+		linkedList.insert.end(new Node<Integer>(8));
+		linkedList.print();
+		linkedList.reverseInChunkIterIter(3);;
+		System.out.println("After reversal");
+		linkedList.print();
+	}
+
 
 	public static void main(String[] args)
 	{
-		reverseIterationRunner();
+		reverseInChunkIterIterRunner();
 	}
 }
