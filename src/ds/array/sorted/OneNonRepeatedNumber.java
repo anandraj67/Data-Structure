@@ -45,7 +45,7 @@ public class OneNonRepeatedNumber {
 				{
 					start = mid + 1;
 				}
-				else // both side are different
+				else // both side are different 
 				{
 					return mid;
 				}
