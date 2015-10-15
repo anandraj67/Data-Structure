@@ -369,4 +369,21 @@ public class LinkedList <Type>
 			}
 		}
 	}
+
+	/**
+	 * @Sawal
+	 *  Reverse linked list in chunk with help of recurssion on both inner and outer
+	 * @Jawab
+	 *  Reverse internal , keep external and pass to next.
+	 */
+	private Node<Type> reverseInChunkRecrRecr_(Node<Type> node,int chunkSize, int lengthDone)
+	{
+		return null;
+	}
+	public void reverseInChunkRecrRecr( int chunkSize)
+	{
+		this.head = reverseInChunkRecrRecr_(this.head,chunkSize,0);
+		
+	}
+	
 }
