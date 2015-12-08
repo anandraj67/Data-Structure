@@ -1,4 +1,4 @@
-package prob.apigee.bid;
+package thread.bidingSystem;
 
 import java.util.ArrayList;
 import java.util.Date;

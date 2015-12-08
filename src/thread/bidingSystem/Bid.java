@@ -1,4 +1,4 @@
-package prob.apigee.bid;
+package thread.bidingSystem;
 
 public class Bid 
 {
