@@ -252,28 +252,28 @@ public class LinkedList <Type>
 	 */
 	public LinkedList <Type> cloneWithoutHashMap()
 	{
-		Node<Type> originalNode = this.head;
+		Node<Type> iter = this.head;
 		LinkedList<Type> clonedList = new LinkedList<Type>();
 		Node<Type> clonedNode = null;
 
-		// Loop for normal pointer and linking the two list
-		while(originalNode!=null)
+		// Loop in original list and linking the two list
+		while(iter!=null)
 		{
-			clonedNode = new Node<Type>(originalNode.data);
+			clonedNode = new Node<Type>(iter.data);
 			clonedList.insert.end(clonedNode);
-			Node<Type> nextNode = originalNode.next;
-			originalNode.next = clonedNode;
-			clonedNode.random = originalNode;
-			originalNode = nextNode;
+			Node<Type> nextNode = iter.next;
+			iter.next = clonedNode;
+			clonedNode.random = iter;
+			iter = nextNode;
 		}
 
-		originalNode = this.head;
-		// Loop for linking random pointer
-		while(originalNode != null)
+		iter = clonedList.head;
+		// Loop in cloned list and link the random pointer
+		while(iter != null)
 		{
-			originalNode.next.random = (originalNode.random!=null)?originalNode.random.next:null;
-			originalNode.next = (originalNode.next!=null)?originalNode.next.next:null;
-			originalNode = originalNode.random;
+			iter.random.next = (iter.next!=null)?iter.next.random:null;
+			iter.random = (iter.random.random!=null)?iter.random.random.next:null;
+			iter = iter.next;
 		}
 		return clonedList;
 	}
