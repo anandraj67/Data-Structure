@@ -47,7 +47,6 @@ public class LinkedList <Type>
 				while(iterator.next != null)
 					iterator = iterator.next;
 				iterator.next = newNode;
-				last = newNode;
 			}
 		}
 	}
@@ -129,7 +128,7 @@ public class LinkedList <Type>
 		while(second != null && second.next != null )
 		{
 			first = first.next; // Moves one step
-			second = second.next.next; // Moves teo step
+			second = second.next.next; // Moves two step
 			if(first == second) // Now first and second both are
 			{					//at same position somewhere in the loop
 				Node<Type> third = this.head;
@@ -209,8 +208,8 @@ public class LinkedList <Type>
 	 * @Sawal
 	 * 	Makes a copy of the random pointer linked list.
 	 * @Jawab
-	 * 	Copy the nornal pointer and keep the
-	 * 		mapping of origianl to  new node in Hash map.
+	 * 	Copy the normal pointer and keep the
+	 * 		mapping of original to  new node in Hash map.
 	 * 	Then iterate again and fix the random pointer.
 	 */
 	public LinkedList <Type> cloneWithHashMapHelp()
@@ -369,21 +368,4 @@ public class LinkedList <Type>
 			}
 		}
 	}
-
-	/**
-	 * @Sawal
-	 *  Reverse linked list in chunk with help of recurssion on both inner and outer
-	 * @Jawab
-	 *  Reverse internal , keep external and pass to next.
-	 */
-	private Node<Type> reverseInChunkRecrRecr_(Node<Type> node,int chunkSize, int lengthDone)
-	{
-		return null;
-	}
-	public void reverseInChunkRecrRecr( int chunkSize)
-	{
-		this.head = reverseInChunkRecrRecr_(this.head,chunkSize,0);
-		
-	}
-	
 }
