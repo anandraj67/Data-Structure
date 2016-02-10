@@ -1,20 +1,31 @@
 package ds.tree;
 
+import java.awt.Window.Type;
+
 import ds.tree.Tree;
 
 public class MainRunner {
 
 	public static void main(String[] args)
 	{
-		//connectInOrderSucc2Runner();
-		//leftViewRunner();
-		lowestCommonAncestorRunner();
-	}
-
-	private static void lowestCommonAncestorRunner()
-	{
 		Tree<Integer> treeRef = new Tree<Integer>();
 		treeRef.createTree();
+		//lowestCommonAncestorRunner(treeRef);
+		connectNodesAtSameLevelIterrRunner(treeRef);
+	}
+
+	private static void connectNodesAtSameLevelIterrRunner(Tree<Integer> treeRef)
+	{
+		treeRef.connectNodesAtSameLevelIterr(treeRef.root);
+		Node<Integer> iter = treeRef.root.left.left;
+		while(iter!=null)
+		{
+			iter.print();
+			iter = iter.levelRight;
+		}
+	}
+	private static void lowestCommonAncestorRunner(Tree<Integer> treeRef)
+	{
 		treeRef.lowestCommonAncestor(treeRef.root,2,4);
 		treeRef.lowestCommonAncestor(treeRef.root,2,3);
 		treeRef.lowestCommonAncestor(treeRef.root,2,11);
