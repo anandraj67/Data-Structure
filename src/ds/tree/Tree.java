@@ -1,21 +1,16 @@
 package ds.tree;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Scanner;
-import java.util.Stack;
-
 import ds.linkedlist.Doubly.DoublyLinkedList;
-import ds.linkedlist.singly.LinkedList;
-import ds.queue.Queue;
-
-class Generic<Type>
-{
-	public Type value;
-}
+import ds.linkedlist.singly.SingleLinkedList;
+import java.util.*;
 
 public class Tree<Type>
 {
+    class Generic<Type>
+    {
+        public Type value;
+    }
+
 	public Node<Type> root;
 	public Tree()
 	{
@@ -55,15 +50,10 @@ public class Tree<Type>
 	private int height(Node<Type> root)
 	{
 	   if (root==null)
-	       return 0;
+           return 0;
 	   else
 	   {
-	     int lheight = height(root.left);
-	     int rheight = height(root.right);
-
-	     if (lheight > rheight)
-	         return(lheight+1);
-	     else return(rheight+1);
+           return Math.max(height(root.left), height(root.right))+1;
 	   }
 	}
 	public int countLeaves(Node<Type> root)
@@ -75,90 +65,6 @@ public class Tree<Type>
 		else
 			return countLeaves(root.left) + countLeaves(root.right);
 	}
-	public int width(Node<Type> root) //can also be done by recurssion as level order.
-	{
-		Stack<Node<Type>> stack1 = new Stack<Node<Type>>();//LR
-		Stack<Node<Type>> stack2 = new Stack<Node<Type>>();//RL
-		stack1.push(root);
-		int width =0 ;
-		while( !stack1.isEmpty() || !stack2.isEmpty() )
-		{
-			if(stack1.size() > width)
-				width = stack1.size();
-			while(!stack1.isEmpty())
-			{
-				Node<Type> popedNode = stack1.pop();
-				if(popedNode.right!= null)
-					stack2.push(popedNode.right);
-				if(popedNode.left!= null)
-					stack2.push(popedNode.left);
-			}
-			if(stack2.size() > width)
-				width = stack2.size();
-			while(!stack2.isEmpty())
-			{
-				Node<Type> popedNode = stack2.pop();
-				if(popedNode.left!= null)
-					stack1.push(popedNode.left);
-				if(popedNode.right!= null)
-					stack1.push(popedNode.right);
-			}
-		}
-		return width;
-	}
-	private int _diameter2(Node<Type> root,Integer [] maxDiameter) // height fun
-	{
-		if(root==null)
-			return 0;
-		if(root.left == null && root.right ==null)
-			return 1;
-		int retLeft=0;
-		if(root.left != null)
-			retLeft = _diameter2(root.left, maxDiameter);
-		int retRight=0;
-		if(root.right != null)
-			retRight = _diameter2(root.right, maxDiameter);
-		if( (retRight+ retLeft+1) > maxDiameter[0])
-			maxDiameter[0] = (retRight+ retLeft+1);
-		if (retRight> retLeft)
-			return retRight+1;
-		else
-			return retLeft+1;
-	}
-	public int diameter2(Node<Type> root)
-	{
-		Integer []maxDiameter = new Integer[1];
-		maxDiameter[0] = 0;
-		_diameter2(root, maxDiameter);
-		return maxDiameter[0];
-	}
-	//Print the diameter of a binary tree .no parent pointer.
-	private int[] _diameter(Node<Type> root)// returns height and diameter
-	{
-		if(root==null)
-		{
-			int []ret = {0,0};
-			return ret;
-		}
-		int []leftRet = _diameter(root.left);
-		int []rightRet = _diameter(root.right);
-
-		int []toRet = new int[2];
-
-		if(leftRet[0] > rightRet[0])
-			toRet[0] = leftRet[0]+1;
-		else
-			toRet[0] = leftRet[0]+1;
-
-		toRet[1] = Integer.max(Integer.max(leftRet[1],rightRet[1]),(leftRet[0]+rightRet[0]+1));
-
-		return toRet;
-	}
-	public int diameter(Node<Type> root)
-	{
-		return _diameter(root)[1];
-	}
-
 	//Traversals
 	public void inOrderRecur(Node<Type> root)
 	{
@@ -182,13 +88,13 @@ public class Tree<Type>
 
 	public void preOrderRecur(Node<Type> root)
 	{
-	if(root!= null)
-	{
-		System.out.print(root.data + " ");
-		preOrderRecur(root.left);
-		preOrderRecur(root.right);
-	}
-}
+        if(root!= null)
+        {
+            System.out.print(root.data + " ");
+            preOrderRecur(root.left);
+            preOrderRecur(root.right);
+        }
+    }
 
 	public void inOrderIter(Node<Type> root) //   keep pushing left if exists
 	{
@@ -250,19 +156,19 @@ public class Tree<Type>
 
 	public void levelOrderIter(Node<Type> root)
 	{
-		Queue<Node<Type>> queue = new Queue<Node<Type>>();
-		queue.insert(root);
+		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
+		queue.add(root);
 		while(!queue.isEmpty())
 		{
 			Node<Type> removedNoded = queue.remove();
 			System.out.print(removedNoded.data + " ");
 			if(removedNoded.left != null)
 			{
-				queue.insert(removedNoded.left);
+				queue.add(removedNoded.left);
 			}
 			if(removedNoded.right != null)
 			{
-				queue.insert(removedNoded.right);
+				queue.add(removedNoded.right);
 			}
 		}
 	}
@@ -326,6 +232,87 @@ public class Tree<Type>
 		return isPresent(root.left, key) || isPresent(root.right, key);
 	}
 
+    public int width(Node<Type> root)
+    {
+        // With dummy node
+        if (root ==  null)
+            return 0;
+        int width = 1;
+        Queue<Node> queue = new LinkedList<Node>();
+        queue.add(root);
+        queue.add(null);
+        while (!queue.isEmpty()){
+            Node removedNode = queue.remove();
+            if (removedNode == null){
+                width = Math.max(width, queue.size());
+                if(!queue.isEmpty()){
+                    queue.add(null);
+                }
+            }else {
+                if(removedNode.left != null){
+                    queue.add(removedNode.left);
+                }
+                if(removedNode.right != null){
+                    queue.add(removedNode.right);
+                }
+            }
+        }
+        return width;
+    }
+
+    private int _diameter2(Node<Type> root,Integer [] maxDiameter) // height fun
+    {
+        if(root==null)
+            return 0;
+        if(root.left == null && root.right ==null)
+            return 1;
+        int retLeft=0;
+        if(root.left != null)
+            retLeft = _diameter2(root.left, maxDiameter);
+        int retRight=0;
+        if(root.right != null)
+            retRight = _diameter2(root.right, maxDiameter);
+        if( (retRight+ retLeft+1) > maxDiameter[0])
+            maxDiameter[0] = (retRight+ retLeft+1);
+        if (retRight> retLeft)
+            return retRight+1;
+        else
+            return retLeft+1;
+    }
+    public int diameter2(Node<Type> root)
+    {
+        Integer []maxDiameter = new Integer[1];
+        maxDiameter[0] = 0;
+        _diameter2(root, maxDiameter);
+        return maxDiameter[0];
+    }
+    //Print the diameter of a binary tree .no parent pointer.
+    private int[] _diameter(Node<Type> root)// returns height and diameter
+    {
+        if(root==null)
+        {
+            int []ret = {0,0};
+            return ret;
+        }
+        int []leftRet = _diameter(root.left);
+        int []rightRet = _diameter(root.right);
+
+        int []toRet = new int[2];
+
+        if(leftRet[0] > rightRet[0])
+            toRet[0] = leftRet[0]+1;
+        else
+            toRet[0] = leftRet[0]+1;
+
+        toRet[1] = Integer.max(Integer.max(leftRet[1],rightRet[1]),(leftRet[0]+rightRet[0]+1));
+
+        return toRet;
+    }
+    public int diameter(Node<Type> root)
+    {
+        return _diameter(root)[1];
+    }
+
 	public boolean isIdentical(Node<Type> root1,Node<Type> root2)
 	{
 		if(root1 == null && root2== null)
@@ -376,9 +363,9 @@ public class Tree<Type>
 	{
 		if(root == null)
 			return true;
-		Queue<Node<Type>> queue = new Queue<Node<Type>>();
-		queue.insert(root);
-		queue.insert(null);
+		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
+		queue.add(root);
+		queue.add(null);
 
 		boolean halfFilled = false;
 		while(!queue.isEmpty())
@@ -387,13 +374,13 @@ public class Tree<Type>
 			if(removedNode == null)
 			{
 				if(!queue.isEmpty())
-					queue.insert(null);
+					queue.add(null);
 			}
 			else
 			{
 				if(removedNode.left != null && !halfFilled)
 				{
-					queue.insert(removedNode.left);
+					queue.add(removedNode.left);
 				}
 				else if(removedNode.left == null && !halfFilled)
 				{
@@ -406,7 +393,7 @@ public class Tree<Type>
 
 				if(removedNode.right != null && !halfFilled)
 				{
-					queue.insert(removedNode.right);
+					queue.add(removedNode.right);
 				}
 				else if(removedNode.right == null && !halfFilled)
 				{
@@ -435,9 +422,9 @@ public class Tree<Type>
 	public void leftView(Node<Type> root)
 	{
 		// can be done with 1 queue with dummy node
-		Queue<Node<Type>> queue1 = new Queue<Node<Type>>();
-		Queue<Node<Type>> queue2 = new Queue<Node<Type>>();
-		queue1.insert(root);
+		Queue<Node<Type>> queue1 = new LinkedList<Node<Type>>();
+		Queue<Node<Type>> queue2 = new LinkedList<Node<Type>>();
+		queue1.add(root);
 		boolean flag = true;
 		while( !queue1.isEmpty() || !queue2.isEmpty() )
 		{
@@ -450,9 +437,9 @@ public class Tree<Type>
 					flag = false;
 				}
 				if(removedNode.left!= null)
-					queue2.insert(removedNode.left);
+					queue2.add(removedNode.left);
 				if(removedNode.right!= null)
-					queue2.insert(removedNode.right);
+					queue2.add(removedNode.right);
 			}
 			while(!queue2.isEmpty())
 			{
@@ -464,9 +451,9 @@ public class Tree<Type>
 					flag = true;
 				}
 				if(removedNode.left!= null)
-					queue1.insert(removedNode.left);
+					queue1.add(removedNode.left);
 				if(removedNode.right!= null)
-					queue1.insert(removedNode.right);
+					queue1.add(removedNode.right);
 			}
 		}
 	}
@@ -701,10 +688,10 @@ public class Tree<Type>
 	}
 	//>>>> BST
 
-	//Given a binary tree, where cost of travelling to the left child is ‘1’ and same for the right child is ‘2’.
-	//Now, given the root of the tree and a value ‘k’, find the total number of nodes that are at a cost of ‘k’ from the root.
+	//Given a binary tree, where cost of travelling to the left child is ï¿½1ï¿½ and same for the right child is ï¿½2ï¿½.
+	//Now, given the root of the tree and a value ï¿½kï¿½, find the total number of nodes that are at a cost of ï¿½kï¿½ from the root.
 
-	private void _rootToLeafPath(Node<Type> root,LinkedList<Node<Type>> path)
+	private void _rootToLeafPath(Node<Type> root,SingleLinkedList<Node<Type>> path)
 	{
 		if(root!=null)
 		{
@@ -726,7 +713,7 @@ public class Tree<Type>
 	}
 	public void rootToLeafPath()
 	{
-		LinkedList<Node<Type>> path = new LinkedList<Node<Type>>();
+		SingleLinkedList<Node<Type>> path = new SingleLinkedList<Node<Type>>();
 		_rootToLeafPath(root,path );
 	}
 	private int _treePathsSum(Node<Integer> root, int val)
@@ -1097,9 +1084,9 @@ public class Tree<Type>
 
 	public void connectNodesAtSameLevelIterr(Node<Type> root)
 	{
-		Queue<Node<Type>> queue = new Queue<Node<Type>>();
-		queue.insert(root);
-		queue.insert(null);
+		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
+		queue.add(root);
+		queue.add(null);
 		Node<Type> preRemovedNode = null;
 		while(!queue.isEmpty())
 		{
@@ -1107,14 +1094,14 @@ public class Tree<Type>
 			if(removedNoded == null) // dummy node for indentifying a level
 			{
 				if(!queue.isEmpty())
-					queue.insert(null);
+					queue.add(null);
 			}
 			else
 			{
 				if(removedNoded.left != null)
-					queue.insert(removedNoded.left);
+					queue.add(removedNoded.left);
 				if(removedNoded.right != null)
-					queue.insert(removedNoded.right);
+					queue.add(removedNoded.right);
 			}
 			if(preRemovedNode != null)
 				preRemovedNode.levelRight = removedNoded;
@@ -1221,7 +1208,7 @@ public class Tree<Type>
 		__connectInOrderSucessorLink(root, holder);
 	}
 
-	//virtical sum to hash map/print only  http://www.geeksforgeeks.org/vertical-sum-in-a-given-binary-tree/      hast map
+	//vertical sum to hash map/print only  http://www.geeksforgeeks.org/vertical-sum-in-a-given-binary-tree/      hast map
 	private void _verticalSum(Node<Integer> root,int where, ds.linkedlist.Doubly.Node<Integer> node,DoublyLinkedList<Integer> dLL )
 	{
 		if(root == null)

@@ -10,20 +10,10 @@ public class MainRunner {
 	{
 		Tree<Integer> treeRef = new Tree<Integer>();
 		treeRef.createTree();
-		//lowestCommonAncestorRunner(treeRef);
-		connectNodesAtSameLevelIterrRunner(treeRef);
+        System.out.println(treeRef.width(treeRef.root));
 	}
 
-	private static void connectNodesAtSameLevelIterrRunner(Tree<Integer> treeRef)
-	{
-		treeRef.connectNodesAtSameLevelIterr(treeRef.root);
-		Node<Integer> iter = treeRef.root.left.left;
-		while(iter!=null)
-		{
-			iter.print();
-			iter = iter.levelRight;
-		}
-	}
+
 	private static void lowestCommonAncestorRunner(Tree<Integer> treeRef)
 	{
 		treeRef.lowestCommonAncestor(treeRef.root,2,4);
@@ -36,15 +26,5 @@ public class MainRunner {
 		treeRef.createTree();
 		
 		treeRef.leftView(treeRef.root);
-	}
-	private static void connectInOrderSucc2Runner() {
-		Tree<Integer> treeRef = new Tree<Integer>();
-		treeRef.createTree();
-		ds.tree.Node<Integer> iter = treeRef.connectInOrderSucessorLink2();
-		while (iter!= null)
-		{
-			System.out.print(iter.data + " " );
-			iter = iter.inOrdSucc;
-		}
 	}
 }

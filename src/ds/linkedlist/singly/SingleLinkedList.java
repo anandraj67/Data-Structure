@@ -1,16 +1,11 @@
 package ds.linkedlist.singly;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 // java has its own in java.util
-// LinkedList<Integer> linkedList = new LinkedList<Integer>();
-public class LinkedList <Type>
+// SingleLinkedList<Integer> linkedList = new SingleLinkedList<Integer>();
+public class SingleLinkedList<Type>
 {
 	public Node<Type> head;
 	public Node<Type> last;
@@ -18,7 +13,7 @@ public class LinkedList <Type>
 	public insert insert;
 	public delete delete;
 
-	public LinkedList()
+	public SingleLinkedList()
 	{
 		head = last= null;
 		insert = new insert();
@@ -162,7 +157,7 @@ public class LinkedList <Type>
 	 *  keep 1 pointer d distance away in longer list.
 	 *  Both will meet at intersection point.
 	 */
-	Node<Type> getIntersectionPoint(LinkedList<Type> ll2)
+	Node<Type> getIntersectionPoint(SingleLinkedList<Type> ll2)
 	{
 		Node<Type> iterBig = null;
 		Node<Type> iterSmall = null;
@@ -212,10 +207,10 @@ public class LinkedList <Type>
 	 * 		mapping of original to  new node in Hash map.
 	 * 	Then iterate again and fix the random pointer.
 	 */
-	public LinkedList <Type> cloneWithHashMapHelp()
+	public SingleLinkedList<Type> cloneWithHashMapHelp()
 	{
 		Node<Type> originalNode = this.head;
-		LinkedList <Type> clonedList = new LinkedList<Type>();
+		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
 		Map<Node<Type>, Node<Type>> map = new HashMap<Node<Type>, Node<Type>>();
 		Node<Type> clonedNode = null;
 
@@ -249,10 +244,10 @@ public class LinkedList <Type>
 	 * 		random pointer of 2nd list and
 	 * 		the next pointer of first list.
 	 */
-	public LinkedList <Type> cloneWithoutHashMap()
+	public SingleLinkedList<Type> cloneWithoutHashMap()
 	{
 		Node<Type> iter = this.head;
-		LinkedList<Type> clonedList = new LinkedList<Type>();
+		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
 		Node<Type> clonedNode = null;
 
 		// Loop in original list and linking the two list

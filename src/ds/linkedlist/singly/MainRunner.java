@@ -1,12 +1,10 @@
 package ds.linkedlist.singly;
 
-import java.util.HashMap;
-
 public class MainRunner {
 
 	public static void getIntersectionPointRunner()
 	{
-		LinkedList<Integer> ll1 = new LinkedList<Integer>();
+		SingleLinkedList<Integer> ll1 = new SingleLinkedList<Integer>();
 		ll1.insert.end(new Node<Integer>(1));
 		ll1.insert.end(new Node<Integer>(2));
 		ll1.insert.end(new Node<Integer>(3));
@@ -14,7 +12,7 @@ public class MainRunner {
 		ll1.insert.end(new Node<Integer>(5));
 		ll1.insert.end(new Node<Integer>(6));
 
-		LinkedList<Integer> ll2 = new LinkedList<Integer>();
+		SingleLinkedList<Integer> ll2 = new SingleLinkedList<Integer>();
 		ll2.insert.end(new Node<Integer>(10));
 		ll2.insert.end(new Node<Integer>(20));
 		ll2.last.next=ll1.head.next.next.next.next;
@@ -23,23 +21,23 @@ public class MainRunner {
 	}
 	public static void detectAndRemoveLoopRunner()
 	{
-		LinkedList<Integer> linkedList = new LinkedList<Integer>();
-		linkedList.insert.end(new Node<Integer>(1));
-		linkedList.insert.end(new Node<Integer>(2));
-		linkedList.insert.end(new Node<Integer>(3));
-		linkedList.insert.end(new Node<Integer>(4));
-		linkedList.insert.end(new Node<Integer>(5));
-		linkedList.insert.end(new Node<Integer>(6));
-		linkedList.insert.end(new Node<Integer>(7));
-		linkedList.last.next = linkedList.head.next.next.next;
+		SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<Integer>();
+		singleLinkedList.insert.end(new Node<Integer>(1));
+		singleLinkedList.insert.end(new Node<Integer>(2));
+		singleLinkedList.insert.end(new Node<Integer>(3));
+		singleLinkedList.insert.end(new Node<Integer>(4));
+		singleLinkedList.insert.end(new Node<Integer>(5));
+		singleLinkedList.insert.end(new Node<Integer>(6));
+		singleLinkedList.insert.end(new Node<Integer>(7));
+		singleLinkedList.last.next = singleLinkedList.head.next.next.next;
 
-		boolean result = linkedList.detectAndRemoveLoop();
+		boolean result = singleLinkedList.detectAndRemoveLoop();
 		System.out.println(result);
-		linkedList.print();
+		singleLinkedList.print();
 
 	}
 	public static void cloneWithoutHashMapRunner() {
-		LinkedList<Integer> llRandom = new LinkedList<Integer>();
+		SingleLinkedList<Integer> llRandom = new SingleLinkedList<Integer>();
 		llRandom.insert.end(new Node<Integer>(1)); 		llRandom.insert.end(new Node<Integer>(2));
 		llRandom.insert.end(new Node<Integer>(3)); 		llRandom.insert.end(new Node<Integer>(4));
 		llRandom.insert.end(new Node<Integer>(5));
@@ -50,13 +48,13 @@ public class MainRunner {
 		llRandom.head.next.random = null;
 		llRandom.print(); //NormalOrder
 		llRandom.printRandomOrder();
-		LinkedList<Integer> clonedLL = llRandom.cloneWithoutHashMap();
+		SingleLinkedList<Integer> clonedLL = llRandom.cloneWithoutHashMap();
 		clonedLL.print(); //NormalOrder
 		clonedLL.printRandomOrder();
 
 	}
 	public static void cloneWithHashMapHelpRunner() {
-		LinkedList<Integer> llRandom = new LinkedList<Integer>();
+		SingleLinkedList<Integer> llRandom = new SingleLinkedList<Integer>();
 		llRandom.insert.end(new Node<Integer>(1)); 		llRandom.insert.end(new Node<Integer>(2));
 		llRandom.insert.end(new Node<Integer>(3)); 		llRandom.insert.end(new Node<Integer>(4));
 		llRandom.insert.end(new Node<Integer>(5));
@@ -67,57 +65,57 @@ public class MainRunner {
 		llRandom.head.next.random = null;
 		llRandom.print(); //NormalOrder
 		llRandom.printRandomOrder();
-		LinkedList<Integer> clonedLL = llRandom.cloneWithHashMapHelp();
+		SingleLinkedList<Integer> clonedLL = llRandom.cloneWithHashMapHelp();
 		clonedLL.print(); //NormalOrder
 		clonedLL.printRandomOrder();
 
 	}
 	public static void  reverseIterationRunner() {
-		LinkedList<Integer> linkedList = new LinkedList<Integer>();
-		linkedList.insert.end(new Node<Integer>(1));
-		linkedList.insert.end(new Node<Integer>(2));
-		linkedList.insert.end(new Node<Integer>(3));
-		linkedList.insert.end(new Node<Integer>(4));
-		linkedList.insert.end(new Node<Integer>(5));
-		linkedList.insert.end(new Node<Integer>(6));
-		linkedList.insert.end(new Node<Integer>(7));
-		linkedList.print();
-		linkedList.reverseIteration();
+		SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<Integer>();
+		singleLinkedList.insert.end(new Node<Integer>(1));
+		singleLinkedList.insert.end(new Node<Integer>(2));
+		singleLinkedList.insert.end(new Node<Integer>(3));
+		singleLinkedList.insert.end(new Node<Integer>(4));
+		singleLinkedList.insert.end(new Node<Integer>(5));
+		singleLinkedList.insert.end(new Node<Integer>(6));
+		singleLinkedList.insert.end(new Node<Integer>(7));
+		singleLinkedList.print();
+		singleLinkedList.reverseIteration();
 		System.out.println("After reversal");
-		linkedList.print();
+		singleLinkedList.print();
 	}
 	public static void  reverseRecurssionRunner() {
-		LinkedList<Integer> linkedList = new LinkedList<Integer>();
-		linkedList.insert.end(new Node<Integer>(1));
-		linkedList.insert.end(new Node<Integer>(2));
-		linkedList.insert.end(new Node<Integer>(3));
-		linkedList.insert.end(new Node<Integer>(4));
-		linkedList.insert.end(new Node<Integer>(5));
-		linkedList.insert.end(new Node<Integer>(6));
-		linkedList.insert.end(new Node<Integer>(7));
-		linkedList.print();
-		linkedList.reverseRecurssion();
+		SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<Integer>();
+		singleLinkedList.insert.end(new Node<Integer>(1));
+		singleLinkedList.insert.end(new Node<Integer>(2));
+		singleLinkedList.insert.end(new Node<Integer>(3));
+		singleLinkedList.insert.end(new Node<Integer>(4));
+		singleLinkedList.insert.end(new Node<Integer>(5));
+		singleLinkedList.insert.end(new Node<Integer>(6));
+		singleLinkedList.insert.end(new Node<Integer>(7));
+		singleLinkedList.print();
+		singleLinkedList.reverseRecurssion();
 		System.out.println("After reversal");
-		linkedList.print();
+		singleLinkedList.print();
 	}
 	public static void  reverseInChunkIterIterRunner() {
-		LinkedList<Integer> linkedList = new LinkedList<Integer>();
-		linkedList.insert.end(new Node<Integer>(1));
-		linkedList.insert.end(new Node<Integer>(2));
-		linkedList.insert.end(new Node<Integer>(3));
-		linkedList.insert.end(new Node<Integer>(4));
-		linkedList.insert.end(new Node<Integer>(5));
-		linkedList.insert.end(new Node<Integer>(6));
-		linkedList.insert.end(new Node<Integer>(7));
-		linkedList.insert.end(new Node<Integer>(8));
-		linkedList.print();
-		linkedList.reverseInChunkIterIter(3);;
+		SingleLinkedList<Integer> singleLinkedList = new SingleLinkedList<Integer>();
+		singleLinkedList.insert.end(new Node<Integer>(1));
+		singleLinkedList.insert.end(new Node<Integer>(2));
+		singleLinkedList.insert.end(new Node<Integer>(3));
+		singleLinkedList.insert.end(new Node<Integer>(4));
+		singleLinkedList.insert.end(new Node<Integer>(5));
+		singleLinkedList.insert.end(new Node<Integer>(6));
+		singleLinkedList.insert.end(new Node<Integer>(7));
+		singleLinkedList.insert.end(new Node<Integer>(8));
+		singleLinkedList.print();
+		singleLinkedList.reverseInChunkIterIter(3);;
 		System.out.println("After reversal");
-		linkedList.print();
+		singleLinkedList.print();
 	}
 
 	public static void main(String[] args)
 	{
-		//reverseInChunkIterIterRunner();
+		reverseInChunkIterIterRunner();
 	}
 }

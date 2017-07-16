@@ -13,9 +13,9 @@ public class Cell implements Cloneable
 	public Piece getPiece() {
 		return piece;
 	}
-	public Object clone(){  
-		return super.clone();  
-	}  
+//	public Object clone(){
+////		return super.clone();
+//	}
 
 	
 }
