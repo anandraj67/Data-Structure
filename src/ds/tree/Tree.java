@@ -179,22 +179,22 @@ public class Tree<Type> {
 			}
 		}
 	}
-	private void _oneLevelRecurssive(Node<Type> root,int level,int levelToPrint) {
+	private void _oneLevelRecursive(Node<Type> root, int level, int levelToPrint) {
         // called from levelOrderRec
 		if(levelToPrint == level)
 			System.out.print(root.data);
 		else
 		{
 			if(root.left != null)
-				_oneLevelRecurssive(root.left, level+1, levelToPrint);
+				_oneLevelRecursive(root.left, level + 1, levelToPrint);
 			if(root.right != null)
-				_oneLevelRecurssive(root.right, level+1, levelToPrint);
+				_oneLevelRecursive(root.right, level + 1, levelToPrint);
 		}
 	}
 	public void levelOrderRec(Node<Type> root) {
 		for (int i=0;i<height(root);i++)
 		{
-			_oneLevelRecurssive(root,0,i);
+			_oneLevelRecursive(root, 0, i);
 		}
 	}
     // Traversals - end
