@@ -10,7 +10,7 @@ public class MainRunner {
 	{
 		Tree<Integer> treeRef = new Tree<Integer>();
 		treeRef.createTree();
-        System.out.println(treeRef.width(treeRef.root));
+        System.out.println(treeRef.countLeaves(treeRef.root));
 	}
 
 
