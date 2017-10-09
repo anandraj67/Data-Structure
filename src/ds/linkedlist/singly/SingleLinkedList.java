@@ -8,73 +8,64 @@ import java.util.Map;
 public class SingleLinkedList<Type>
 {
 	public Node<Type> head;
-	public Node<Type> last;
 
-	public insert insert;
-	public delete delete;
-
-	public SingleLinkedList()
-	{
-		head = last= null;
-		insert = new insert();
-		delete = new delete();
+	public SingleLinkedList(){
+		head = null;
 	}
-
-	public class insert
-	{
-		public void begnning(Node<Type> newNode)
-		{
-		    newNode.next = head;
-		    if( isEmpty() )
-		    	last = newNode;
-		    head = newNode;
-		}
-
-		public void end(Node<Type> newNode)
-		{
-			newNode.next = null;
-			if( isEmpty() )
-				head = last = newNode;
-			else
-			{
-				// OR last.next= newNode; last = newNode;
-				Node<Type> iterator = head;
-				while(iterator.next != null)
-					iterator = iterator.next;
-				iterator.next = newNode;
-			}
-		}
-	}
-
-	public class delete // TO-DO : free memory in c++
-	{
-		public void begnning()
-		{
-			if(!isEmpty())
-				head = head.next;
-			if(isEmpty())
-				last = null;
-		}
-
-		public void end()
-		{
-			if( head == null || head.next == null)
-			{
-				head = last = null;
-			}
-			else
-			{
-				Node<Type> iterator = head;
-				while(iterator.next.next != null)
-					iterator = iterator.next;
-				iterator.next = null;
-				last = iterator;
-			}
-		}
-	}
-
-	public int size()
-	{
+    public void insert_beginning(Node<Type> newNode){
+        newNode.next = head;
+        head = newNode;
+    }
+    public void insert_end(Node<Type> newNode){
+        newNode.next = null;
+        if( isEmpty() )
+            head = newNode;
+        else
+        {
+            // OR last.next= newNode; last = newNode;
+            Node<Type> iterator = head;
+            while(iterator.next != null)
+                iterator = iterator.next;
+            iterator.next = newNode;
+        }
+    }
+    public void insert_at_position(int position, Node<Type> newNode){
+        if(position > SingleLinkedList.this.size())
+            return;
+        if(position==0){
+            newNode.next = head;
+            head = newNode;
+        }else{
+            Node<Type> iter = head;
+            while (position>1){
+                iter = iter.next;
+                position--;
+            }
+            newNode.next = iter.next;
+            iter.next = newNode;
+        }
+    }
+    public void delete_beginning(){
+        if(!isEmpty())
+            head = head.next;
+    }
+    public void delete_end(){
+        if( head == null || head.next == null)
+        {
+            head = null;
+        }
+        else
+        {
+            Node<Type> iterator = head;
+            while(iterator.next.next != null)
+                iterator = iterator.next;
+            iterator.next = null;
+        }
+    }
+    public void delete_at_position(int position){
+        //todo
+    }
+	public int size(){
 		Node<Type> iterator = head;
 		int len= 0 ;
 		while(iterator != null)
@@ -84,14 +75,10 @@ public class SingleLinkedList<Type>
 		}
 		return len;
 	}
-
-	public boolean isEmpty()
-	{
+	public boolean isEmpty(){
 		return (head == null);
 	}
-
-	public void print()
-	{
+	public void print(){
 		Node<Type> node = this.head;
 		while(node != null)
 		{
@@ -100,7 +87,60 @@ public class SingleLinkedList<Type>
 		}
 		System.out.println(" ");
 	}
+    public void printRandomOrder(){
+        System.out.println("The linked list in Random order is : ");
+        Node<Type> iter = this.head;
+        while(iter != null)
+        {
+            System.out.print(iter.data +" ");
+            iter = iter.random;
+        }
+        System.out.println(" ");
+    }
+    /**
+     * @Sawal
+     * 	Reverse a linked list with iteration
+     * @Jawab
+     * 	Take three pointer to null first and second
+     * 	Reverse pointer of first and second
+     *	Increment all three.
+     */
+    public void reverseIteration() {
+        Node<Type> first = null;
+        Node<Type> second = this.head;
+        Node<Type> third;
 
+        while(second !=null) 		// because connection of second and
+        {							// first is to be reversed
+            third = second.next;
+            second.next = first;
+
+            first = second;		// Increment
+            second = third;
+        }
+        this.head = first;
+    }
+    /**
+     * @Sawal
+     * 	Reverse a linked list with Recursion
+     * @Jawab
+     * 	Base case : null or single node.
+     * 	Recursively call for next node.
+     *	After returning link reversed last to node
+     *		and  node to null.
+     *	Every recursive step is returning head of reversed.
+     */
+    private Node<Type> reverseRecurssion_(Node<Type> node) {
+        if(node == null || node.next == null) 	// Base case
+            return node;
+        Node<Type> nodeReturned = reverseRecurssion_(node.next);
+        node.next.next = node;
+        node.next =null;
+        return nodeReturned;
+    }
+    public void reverseRecurssion() {
+        this.head = reverseRecurssion_(this.head);
+    }
 	/**
 	 * @Sawal
 	 * 1->2->3->4->5->6
@@ -116,8 +156,7 @@ public class SingleLinkedList<Type>
 	 * 		 they will meet at merge point.
 	 * 		Unlink the previous node.
 	 */
-	boolean detectAndRemoveLoop()
-	{
+	boolean detectAndRemoveLoop(){
 		Node<Type> first = this.head;
 		Node<Type> second = this.head;
 		while(second != null && second.next != null )
@@ -157,8 +196,7 @@ public class SingleLinkedList<Type>
 	 *  keep 1 pointer d distance away in longer list.
 	 *  Both will meet at intersection point.
 	 */
-	Node<Type> getIntersectionPoint(SingleLinkedList<Type> ll2)
-	{
+	Node<Type> getIntersectionPoint(SingleLinkedList<Type> ll2){
 		Node<Type> iterBig = null;
 		Node<Type> iterSmall = null;
 		int lenght1 = this.size();
@@ -186,19 +224,6 @@ public class SingleLinkedList<Type>
 		}
 		return iterBig;
 	}
-
-	public void printRandomOrder()
-	{
-		System.out.println("The linked list in Random order is : ");
-		Node<Type> iter = this.head;
-		while(iter != null)
-		{
-			System.out.print(iter.data +" ");
-			iter = iter.random;
-		}
-		System.out.println(" ");
-	}
-
 	/**
 	 * @Sawal
 	 * 	Makes a copy of the random pointer linked list.
@@ -207,8 +232,7 @@ public class SingleLinkedList<Type>
 	 * 		mapping of original to  new node in Hash map.
 	 * 	Then iterate again and fix the random pointer.
 	 */
-	public SingleLinkedList<Type> cloneWithHashMapHelp()
-	{
+	public SingleLinkedList<Type> cloneWithHashMapHelp(){
 		Node<Type> originalNode = this.head;
 		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
 		Map<Node<Type>, Node<Type>> map = new HashMap<Node<Type>, Node<Type>>();
@@ -218,7 +242,7 @@ public class SingleLinkedList<Type>
 		while(originalNode!=null)
 		{
 			clonedNode = new Node<Type>(originalNode.data);
-			clonedList.insert.end(clonedNode);
+			clonedList.insert_end(clonedNode);
 			map.put(originalNode, clonedNode);
 			originalNode = originalNode.next;
 		}
@@ -232,7 +256,6 @@ public class SingleLinkedList<Type>
 		}
 		return clonedList;
 	}
-
 	/**
 	 * @Sawal
 	 * 	Makes a copy of the random pointer linked list.
@@ -244,8 +267,7 @@ public class SingleLinkedList<Type>
 	 * 		random pointer of 2nd list and
 	 * 		the next pointer of first list.
 	 */
-	public SingleLinkedList<Type> cloneWithoutHashMap()
-	{
+	public SingleLinkedList<Type> cloneWithoutHashMap(){
 		Node<Type> iter = this.head;
 		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
 		Node<Type> clonedNode = null;
@@ -254,7 +276,7 @@ public class SingleLinkedList<Type>
 		while(iter!=null)
 		{
 			clonedNode = new Node<Type>(iter.data);
-			clonedList.insert.end(clonedNode);
+			clonedList.insert_end(clonedNode);
 			Node<Type> nextNode = iter.next;
 			iter.next = clonedNode;
 			clonedNode.random = iter;
@@ -271,55 +293,6 @@ public class SingleLinkedList<Type>
 		}
 		return clonedList;
 	}
-
-	/**
-	 * @Sawal
-	 * 	Reverse a linked list with iteration
-	 * @Jawab
-	 * 	Take three pointer to null first and second
-	 * 	Reverse pointer of first and second
-	 *	Increment all three.
-	 */
-	public void reverseIteration()
-	{
-		Node<Type> first = null;
-		Node<Type> second = this.head;
-		Node<Type> third;
-
-		while(second !=null) 		// because connection of second and
-		{							// first is to be reversed
-			third = second.next;
-			second.next = first;
-
-			first = second;		// Increment
-			second = third;
-		}
-		this.head = first;
-	}
-
-	/**
-	 * @Sawal
-	 * 	Reverse a linked list with Recursion
-	 * @Jawab
-	 * 	Base case : null or single node.
-	 * 	Recursively call for next node.
-	 *	After returning link reversed last to node
-	 *		and  node to null.
-	 *	Every recursive step is returning head of reversed.
-	 */
-	private Node<Type> reverseRecurssion_(Node<Type> node)
-	{
-		if(node == null || node.next == null) 	// Base case
-			return node;
-		Node<Type> nodeReturned = reverseRecurssion_(node.next);
-		node.next.next = node;
-		node.next =null;
-		return nodeReturned;
-	}
-	public void reverseRecurssion()
-	{
-		this.head = reverseRecurssion_(this.head);
-	}
 	/**
 	 * @Sawal
 	 *  Reverse linked list in chunk
@@ -328,8 +301,7 @@ public class SingleLinkedList<Type>
 	 *  At the end of 2nd chunk. 1st and 2nd will be connected.
 	 *  So keeping 2 chunkVariables.
 	 */
-	public void reverseInChunkIterIter(int chunkSize)
-	{
+	public void reverseInChunkIterIter(int chunkSize){
 		Node<Type> first = null;
 		Node<Type> second = this.head;
 		Node<Type> third ;
