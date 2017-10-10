@@ -625,7 +625,7 @@ public class Tree<Type> {
 	private void _rootToLeafPath(Node<Type> root,SingleLinkedList<Node<Type>> path) {
 		if(root!=null)
 		{
-			path.insert.end(new ds.linkedlist.singly.Node<Node<Type>>(root));
+			path.insert_end(new ds.linkedlist.singly.Node<Node<Type>>(root));
 			if(root.left == null && root.right == null)
 			{
 				ds.linkedlist.singly.Node<Node<Type>> iterator = path.head;
@@ -638,7 +638,7 @@ public class Tree<Type> {
 			}
 			_rootToLeafPath(root.left, path);
 			_rootToLeafPath(root.right, path);
-			path.delete.end();
+			path.delete_end();
 		}
 	}
 	public void rootToLeafPath() {

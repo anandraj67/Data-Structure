@@ -114,8 +114,24 @@ public class MainRunner {
 		singleLinkedList.print();
 	}
 
-	public static void main(String[] args)
+    public static void merge_sorted_linked_lists_runner() {
+        SingleLinkedList<Integer> ll1 = new SingleLinkedList<Integer>();
+        ll1.insert_end(new Node<Integer>(2));
+        ll1.insert_end(new Node<Integer>(4));
+        ll1.insert_end(new Node<Integer>(6));
+
+        SingleLinkedList<Integer> ll2 = new SingleLinkedList<Integer>();
+        ll2.insert_end(new Node<Integer>(3));
+        ll2.insert_end(new Node<Integer>(5));
+        ll2.insert_end(new Node<Integer>(7));
+        ll2.insert_end(new Node<Integer>(9));
+
+        SingleLinkedList<Integer> ll = SingleLinkedList.merge_sorted_linked_lists(ll1, ll2);
+        ll.print();
+    }
+
+    public static void main(String[] args)
 	{
-		reverseInChunkIterIterRunner();
+        merge_sorted_linked_lists_runner();
 	}
 }

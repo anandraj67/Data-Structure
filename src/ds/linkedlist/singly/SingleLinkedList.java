@@ -29,6 +29,9 @@ public class SingleLinkedList<Type>
             iterator.next = newNode;
         }
     }
+    public void insert_after(Node<Type> newNode,Node<Type> after){
+        //todo
+    }
     public void insert_at_position(int position, Node<Type> newNode){
         if(position > SingleLinkedList.this.size())
             return;
@@ -61,6 +64,9 @@ public class SingleLinkedList<Type>
                 iterator = iterator.next;
             iterator.next = null;
         }
+    }
+    public void delete_node(Node<Type> node){
+        //todo
     }
     public void delete_at_position(int position){
         //todo
@@ -335,4 +341,44 @@ public class SingleLinkedList<Type>
 			}
 		}
 	}
+    /**
+     *
+     * @Sawal
+     * Merge to sorted linked list
+     * ll1: 2 4
+     * ll2: 1 3 5
+     * @Jawab
+     * Take a last pointer and 2 iterators
+     * Move the iterator which is of lower value.
+     */
+    public  static SingleLinkedList<Integer>  merge_sorted_linked_lists(SingleLinkedList<Integer> ll1,SingleLinkedList<Integer> ll2){
+        Node<Integer> iter1 = ll1.head;
+        Node<Integer> iter2 = ll2.head;
+        SingleLinkedList<Integer> ll = new SingleLinkedList<Integer>();
+        if(iter1 == null || iter2 == null){
+            ll.head = (iter1 == null ) ? iter2 : iter1;
+        }else{
+            ll.head = (iter1.data > iter2.data) ? iter2 : iter1;
+        }
+        ll1.head = null;
+        ll2.head = null;
+        Node<Integer> last = null;
+        while (iter1!=null && iter2!=null){
+            if(iter1.data < iter2.data){
+                if (last!=null)
+                    last.next = iter1;
+                last = iter1;
+                iter1 = iter1.next;
+            }else if(iter2.data < iter1.data) {
+                if (last!=null)
+                    last.next = iter2;
+                last = iter2;
+                iter2 = iter2.next;
+            }
+        }
+        if(last!= null){
+            last.next = (iter1==null)? iter2:iter1;
+        }
+        return ll;
+    }
 }
