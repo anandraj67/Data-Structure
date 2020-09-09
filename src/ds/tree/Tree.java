@@ -1079,6 +1079,8 @@ public class Tree<Type> {
         // recurrsion on 2^n-1 size
 		this.root =  _sortedArrayToCompleteBST(arr,0,arr.length-1);
 	}
+	
+	// recurssion with multi return type
 	private Node<Type>[]  _connectInOrderSuccessorLink(Node<Type> root) {	// Every node returning min' and max'and link is made.
 		if(root==null)
 		{
@@ -1110,19 +1112,18 @@ public class Tree<Type> {
 		}
 		return arrToRet;
 	}
-	private void __connectInOrderSuccessorLink(Node<Type> root, AtomicReference<Node<Type>> toBelinked) {
-		if(root == null)
-			return;
-		__connectInOrderSuccessorLink(root.right, toBelinked);
-		root.inOrdSucc = toBelinked.get();
-		toBelinked.set(root);
+	// recurssion with global variable
+	private void __connectInOrderSuccessorLink(Node<Type> root, AtomicReference<Node<Type>> prev) {
+		if(root == null) return;
 		__connectInOrderSuccessorLink(root.left, toBelinked);
+		if (prev.get()!=null) prev.get().inOrdSucc = root;
+		prev.get() = root;
+		__connectInOrderSuccessorLink(root.right, toBelinked);
 	}
 	public void connectInOrderSuccessorLink(Node<Type> root) {
 		//_connectInOrderSucessorLink(root); // own
-		//Array<Node<Type>> toBelinked = new Array<>();
-        AtomicReference<Node<Type>> holder = new AtomicReference<Node<Type>>();
-		holder.set(null);
+	        AtomicReference<Node<Type>> prev = new AtomicReference<Node<Type>>();
+		prev.set(null);
 		__connectInOrderSuccessorLink(root, holder);
 	}
 	private void _verticalSum(Node<Integer> root,int where, ds.linkedlist.Doubly.Node<Integer> node,DoublyLinkedList<Integer> dLL ) {
