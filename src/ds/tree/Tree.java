@@ -93,14 +93,65 @@ public class Tree<Type> {
             preOrderRecur(root.right);
         }
     }
-	public void inOrderIterative(Node<Type> root) {
-		// to do 
+	// With nested while loop
+	public List <Integer> inOrderIterative(Node<Type> root) {
+		List < Integer > res = new ArrayList < > ();
+
+		if(root == null) return res;
+			Stack<TreeNode> stack = new Stack<TreeNode>();
+			stack.add(root);
+		while(!stack.isEmpty())
+		{
+		    while(stack.peek().left != null){
+			stack.push(stack.peek().left);
+		    }
+
+		    while(!stack.isEmpty()){
+			TreeNode popedTreeNode = stack.pop();
+			res.add(popedTreeNode.val);
+			if(popedTreeNode.right != null){
+			    stack.push(popedTreeNode.right);
+			    break;
+			}
+		    }
+
+		}
+		return res;
 	}
-    public void inOrderIterativeMorrisTraversal(Node<Type> root){
-        //inorder without recursion and without stack page 6
-        //MorrisTraversal
-        //http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
-    }
+	// With flag to add or remove
+	public List<Integer> inOrderIterative_2(TreeNode root) {
+		List < Integer > res = new ArrayList < > ();
+
+		if(root == null) return res;
+		Stack<TreeNode> stack = new Stack<TreeNode>();
+		stack.add(root);
+		boolean add_new = (stack.peek().left!=null);
+		while(!stack.isEmpty())
+		{
+			if(add_new){
+				stack.push(stack.peek().left);
+				add_new = (stack.peek().left!=null);
+			}
+			else{
+				TreeNode popedTreeNode = stack.pop();
+				res.add(popedTreeNode.val);
+				if(popedTreeNode.right != null){
+				    stack.push(popedTreeNode.right);
+				    add_new = (stack.peek().left!=null);
+				}else{
+				    add_new = false;
+				}
+
+			}
+		}
+		return res;
+	}
+	
+	public void inOrderIterativeMorrisTraversal(Node<Type> root){
+	//inorder without recursion and without stack page 6
+	//MorrisTraversal
+	//http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
+	}
 	public void preOrderIterative(Node<Type> root) {
 		Stack<Node<Type>> stack = new Stack<Node<Type>>();
 		stack.push(root);
