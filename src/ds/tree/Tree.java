@@ -94,21 +94,7 @@ public class Tree<Type> {
         }
     }
 	public void inOrderIterative(Node<Type> root) {
-		if(root == null) return;
-		Stack<Node<Type>> stack = new Stack<Node<Type>>();
-		stack.add(root);
-		while(!stack.isEmpty())
-		{
-			if (stack.peek().left != null)
-				stack.push(stack.peek().left);
-			else
-			{
-				Node<Type> popedTreeNode = stack.pop();
-				System.out.print(popedTreeNode.data + " ");
-				if(popedTreeNode.right != null)
-					stack.push(popedTreeNode.right);
-			}
-		}
+		// to do 
 	}
     public void inOrderIterativeMorrisTraversal(Node<Type> root){
         //inorder without recursion and without stack page 6
