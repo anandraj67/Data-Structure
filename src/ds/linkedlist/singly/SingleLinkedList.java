@@ -266,37 +266,10 @@ public class SingleLinkedList<Type>
 	 * @Sawal
 	 * 	Makes a copy of the random pointer linked list.
 	 * @Jawab
-	 * 	Copy the normal pointer and keep the
-	 * 		mapping of original to  new node by connecting
-	 * 		next of 1st list and random of 2nd list with each other.
-	 * 	Then iterate again and fix the
-	 * 		random pointer of 2nd list and
-	 * 		the next pointer of first list.
+	 * 	weaving new node between old nodes, then connect random, then un weaving.
 	 */
 	public SingleLinkedList<Type> cloneWithoutHashMap(){
-		Node<Type> iter = this.head;
 		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
-		Node<Type> clonedNode = null;
-
-		// Loop in original list and linking the two list
-		while(iter!=null)
-		{
-			clonedNode = new Node<Type>(iter.data);
-			clonedList.insert_end(clonedNode);
-			Node<Type> nextNode = iter.next;
-			iter.next = clonedNode;
-			clonedNode.random = iter;
-			iter = nextNode;
-		}
-
-		iter = clonedList.head;
-		// Loop in cloned list and link the random pointer
-		while(iter != null)
-		{
-			iter.random.next = (iter.next!=null)?iter.next.random:null;
-			iter.random = (iter.random.random!=null)?iter.random.random.next:null;
-			iter = iter.next;
-		}
 		return clonedList;
 	}
 	/**
