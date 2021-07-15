@@ -1,13 +1,17 @@
 package thread.creation;
 
-public class MyRunnable implements Runnable {
+public class InfinitePrintThread extends Thread {
+	public InfinitePrintThread(String name) {
+		super(name);
+	}
+
 	@Override
 	public void run() {
 		while(true)
 		{
 			System.out.println(Thread.currentThread().getName());
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(900);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

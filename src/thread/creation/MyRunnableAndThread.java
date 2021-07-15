@@ -1,8 +1,8 @@
 package thread.creation;
 
-public class SomeJob implements Runnable {
+public class MyRunnableAndThread implements Runnable {
 	Thread thread;
-	public SomeJob(String name) {
+	public MyRunnableAndThread(String name) {
 		thread = new Thread(this,name);
 	}
 	@Override
