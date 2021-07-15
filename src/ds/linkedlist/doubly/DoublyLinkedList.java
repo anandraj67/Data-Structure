@@ -1,4 +1,4 @@
-package ds.linkedlist.Doubly;
+package ds.linkedlist.doubly;
 
 public class DoublyLinkedList <Type>
 {
@@ -8,17 +8,14 @@ public class DoublyLinkedList <Type>
 	public insert insert;
 	public delete delete;
 	
-	public DoublyLinkedList()
-	{
+	public DoublyLinkedList() {
 		head = last= null;
 		insert = new insert();
 		delete = new delete();
 	}
 	
-	public class insert
-	{
-		public void begnning(Type dataIn) 
-		{
+	public class insert {
+		public void begnning(Type dataIn) {
 			Node<Type> newNode = new Node<Type>(dataIn);
 		    newNode.next = head;
 		    if( isEmpty() )
@@ -30,8 +27,7 @@ public class DoublyLinkedList <Type>
 	
 		// delete at a point
 		
-		public void end(Type dataIn) 
-		{
+		public void end(Type dataIn) {
 			Node<Type> newNode = new Node<Type>(dataIn);
 			if( isEmpty() )
 				head  = newNode;
@@ -48,8 +44,7 @@ public class DoublyLinkedList <Type>
 		}
 	}
 
-	public class delete // TO-DO : free memory in c++
-	{
+	public class delete{
 		public void begnning() 
 		{
 			if(!isEmpty())
@@ -62,9 +57,7 @@ public class DoublyLinkedList <Type>
 		}
 		
 		//delete at a point
-		
-		public void end() 
-		{
+		public void end(){
 			if( head == null || head.next == null)
 			{
 				head = last = null;
@@ -81,8 +74,7 @@ public class DoublyLinkedList <Type>
 		}
 	}
 
-	public int length()
-	{
+	public int length(){
 		Node<Type> iterator = head;
 		int len= 0 ;
 		while(iterator != null)
@@ -93,10 +85,8 @@ public class DoublyLinkedList <Type>
 		return len;
 	}
 	
-	public boolean isEmpty()
-	{
+	public boolean isEmpty(){
 		return (head == null);
 	}
-
 	
 }

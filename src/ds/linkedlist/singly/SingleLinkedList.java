@@ -3,10 +3,7 @@ package ds.linkedlist.singly;
 import java.util.HashMap;
 import java.util.Map;
 
-// java has its own in java.util
-// SingleLinkedList<Integer> linkedList = new SingleLinkedList<Integer>();
-public class SingleLinkedList<Type>
-{
+public class SingleLinkedList<Type> {
 	public Node<Type> head;
 
 	public SingleLinkedList(){
@@ -73,6 +70,16 @@ public class SingleLinkedList<Type>
     }
 	public int size(){
 		Node<Type> iterator = head;
+		int len= 0 ;
+		while(iterator != null)
+		{
+			len++;
+			iterator=iterator.next;
+		}
+		return len;
+	}
+	public static int size(Node head){
+		Node iterator = head;
 		int len= 0 ;
 		while(iterator != null)
 		{
@@ -194,164 +201,5 @@ public class SingleLinkedList<Type>
 		}
 		return false; // No loop is there
 	}
-	/**
-	 * @Sawal
-	 *  Write a function to get the intersection point of two Linked Lists.
-	 * @Jawab
-	 *  Find the difference in length of two list,say d.</br>
-	 *  keep 1 pointer d distance away in longer list.
-	 *  Both will meet at intersection point.
-	 */
-	Node<Type> getIntersectionPoint(SingleLinkedList<Type> ll2){
-		Node<Type> iterBig = null;
-		Node<Type> iterSmall = null;
-		int lenght1 = this.size();
-		int lenght2 = ll2.size();
-		if(lenght1 > lenght2)
-		{
-			iterBig = this.head;
-			iterSmall = ll2.head;
-		}
-		else
-		{
-			iterBig = ll2.head;
-			iterSmall = this.head;
-		}
-		int diff = Math.abs(lenght1- lenght2);
-		while(diff !=0)
-		{
-			iterBig = iterBig.next;
-			diff--;
-		}
-		while(iterBig != iterSmall)
-		{
-			iterBig = iterBig.next;
-			iterSmall = iterSmall.next;
-		}
-		return iterBig;
-	}
-	/**
-	 * @Sawal
-	 * 	Makes a copy of the random pointer linked list.
-	 * @Jawab
-	 * 	Copy the normal pointer and keep the
-	 * 		mapping of original to  new node in Hash map.
-	 * 	Then iterate again and fix the random pointer.
-	 */
-	public SingleLinkedList<Type> cloneWithHashMapHelp(){
-		Node<Type> originalNode = this.head;
-		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
-		Map<Node<Type>, Node<Type>> map = new HashMap<Node<Type>, Node<Type>>();
-		Node<Type> clonedNode = null;
 
-		// Loop for normal pointer and saving the map
-		while(originalNode!=null)
-		{
-			clonedNode = new Node<Type>(originalNode.data);
-			clonedList.insert_end(clonedNode);
-			map.put(originalNode, clonedNode);
-			originalNode = originalNode.next;
-		}
-
-		originalNode = this.head;
-		// Loop for random pointer
-		while(originalNode != null)
-		{
-			map.get(originalNode).random = map.get( originalNode.random );
-			originalNode = originalNode.next;
-		}
-		return clonedList;
-	}
-	/**
-	 * @Sawal
-	 * 	Makes a copy of the random pointer linked list.
-	 * @Jawab
-	 * 	weaving new node between old nodes, then connect random, then un weaving.
-	 */
-	public SingleLinkedList<Type> cloneWithoutHashMap(){
-		SingleLinkedList<Type> clonedList = new SingleLinkedList<Type>();
-		return clonedList;
-	}
-	/**
-	 * @Sawal
-	 *  Reverse linked list in chunk
-	 * @Jawab
-	 *  3 pointers for internal reversal.
-	 *  At the end of 2nd chunk. 1st and 2nd will be connected.
-	 *  So keeping 2 chunkVariables.
-	 */
-	public void reverseInChunkIterIter(int chunkSize){
-		Node<Type> first = null;
-		Node<Type> second = this.head;
-		Node<Type> third ;
-		Node<Type> chunkFirst=this.head ;
-		Node<Type> chunkSecond = null;
-		int k = chunkSize;
-		boolean isFirstPass = true;
-		// (1 2 3) (4 5 6) (7 8 9 ) 8 3
-		while(second != null)
-		{
-			third = second.next;
-			second.next = first;
-			first = second;
-			second = third;
-			k--;
-			if(k==0 || second == null)
-			{
-				if(isFirstPass == true)
-				{
-					this.head = first;
-					isFirstPass = false;
-				}
-				else
-				{
-					chunkFirst.next = first;
-					chunkFirst = chunkSecond;
-				}
-				chunkSecond = second;
-				k = chunkSize;
-				first = null;
-			}
-		}
-	}
-    /**
-     *
-     * @Sawal
-     * Merge to sorted linked list
-     * ll1: 2 4
-     * ll2: 1 3 5
-     * @Jawab
-     * Take a last pointer and 2 iterators
-     * Move the iterator which is of lower value.
-     */
-    public  static SingleLinkedList<Integer>  merge_sorted_linked_lists(SingleLinkedList<Integer> ll1,SingleLinkedList<Integer> ll2){
-        Node<Integer> iter1 = ll1.head;
-        Node<Integer> iter2 = ll2.head;
-        SingleLinkedList<Integer> ll = new SingleLinkedList<Integer>();
-        if(iter1 == null || iter2 == null){
-            ll.head = (iter1 == null ) ? iter2 : iter1;
-        }else{
-            ll.head = (iter1.data > iter2.data) ? iter2 : iter1;
-        }
-        ll1.head = null;
-        ll2.head = null;
-        Node<Integer> last = null;
-        while (iter1!=null && iter2!=null){
-            if(iter1.data < iter2.data){
-                if (last!=null)
-                    last.next = iter1;
-                last = iter1;
-                iter1 = iter1.next;
-            }else if(iter2.data < iter1.data) {
-                if (last!=null)
-                    last.next = iter2;
-                last = iter2;
-                iter2 = iter2.next;
-            }
-        }
-        if(last!= null){
-            last.next = (iter1==null)? iter2:iter1;
-        }
-        return ll;
-    }
 }

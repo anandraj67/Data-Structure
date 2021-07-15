@@ -1,8 +1,7 @@
-package ds.linkedlist.Doubly;
+package ds.linkedlist.doubly;
 
-public class Node<Type>
-{
-	public Type data;// TO-DO : make it generic
+public class Node<Type> {
+	public Type data;
 	public Node<Type> next;
 	public Node<Type> prev;
 	public Node(Type data) 

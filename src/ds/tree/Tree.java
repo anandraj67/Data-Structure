@@ -1,6 +1,6 @@
 package ds.tree;
 
-import ds.linkedlist.Doubly.DoublyLinkedList;
+import ds.linkedlist.doubly.DoublyLinkedList;
 import ds.linkedlist.singly.SingleLinkedList;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -1127,7 +1127,7 @@ public class Tree<Type> {
 //		prev.set(null);
 //		__connectInOrderSuccessorLink(root, holder);
 	}
-	private void _verticalSum(Node<Integer> root,int where, ds.linkedlist.Doubly.Node<Integer> node,DoublyLinkedList<Integer> dLL ) {
+	private void _verticalSum(Node<Integer> root, int where, ds.linkedlist.doubly.Node<Integer> node, DoublyLinkedList<Integer> dLL ) {
 		if(root == null)
 			return;
 		if( node ==  null )
@@ -1153,7 +1153,7 @@ public class Tree<Type> {
 	public  void verticalSum(Node<Integer> root) {
 		DoublyLinkedList<Integer> dLL = new DoublyLinkedList<Integer>();
 		_verticalSum(root,0,null,dLL);
-		ds.linkedlist.Doubly.Node<Integer> iter = dLL.head;
+		ds.linkedlist.doubly.Node<Integer> iter = dLL.head;
 		while(iter != null)
 		{
 			System.out.print(iter.data +  " ");
