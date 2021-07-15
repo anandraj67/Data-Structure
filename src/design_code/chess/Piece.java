@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public abstract class Piece 
+public abstract class Piece
 {
 	private String nameCode;
 	private String colorCode;

@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class King extends Piece 
+public class King extends Piece
 {
 	public static final String nameCode = "K";
 	public King(String colorCode) 

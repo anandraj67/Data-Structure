@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class Pawn extends Piece 
+public class Pawn extends Piece
 {
 	public static final String nameCode = "P";
 	public Pawn(String colorCode) 

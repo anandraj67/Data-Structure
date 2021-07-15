@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class Horse extends Piece 
+public class Horse extends Piece
 {
 	public static final String nameCode = "H";
 	public Horse(String colorCode) 

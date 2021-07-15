@@ -1,7 +1,6 @@
-package thread.joinTest;
+package thread.creation;
 
-public class SomeJob implements Runnable
-{
+public class SomeJob implements Runnable {
 	Thread thread;
 	public SomeJob(String name) {
 		thread = new Thread(this,name);
@@ -12,15 +11,14 @@ public class SomeJob implements Runnable
 		{
 			System.out.println(thread.getName());
 			try {
-				thread.sleep(1000);
+				thread.sleep(800);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 	}
 
-	public void start()
-	{
+	public void start() {
 		thread.start();
 	}
 }

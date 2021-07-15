@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class Queen extends Piece 
+public class Queen extends Piece
 {
 	public static final String nameCode = "Q";
 	public Queen(String colorCode) 

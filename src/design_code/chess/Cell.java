@@ -1,4 +1,4 @@
-package prob.fk.chess;
+package design_code.chess;
 
 public class Cell implements Cloneable
 {

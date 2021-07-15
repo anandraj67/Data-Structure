@@ -94,11 +94,11 @@ public class Tree<Type> {
         }
     }
 	// With nested while loop
-	public List <Integer> inOrderIterative(Node<Type> root) {
-		List < Integer > res = new ArrayList < > ();
+	public List <Type> inOrderIterative(Node<Type> root) {
+		List < Type > res = new ArrayList < > ();
 
 		if(root == null) return res;
-			Stack<TreeNode> stack = new Stack<TreeNode>();
+			Stack<Node<Type>> stack = new Stack<Node<Type>>();
 			stack.add(root);
 		while(!stack.isEmpty())
 		{
@@ -107,8 +107,8 @@ public class Tree<Type> {
 		    }
 
 		    while(!stack.isEmpty()){
-			TreeNode popedTreeNode = stack.pop();
-			res.add(popedTreeNode.val);
+			Node<Type> popedTreeNode = stack.pop();
+			res.add(popedTreeNode.data);
 			if(popedTreeNode.right != null){
 			    stack.push(popedTreeNode.right);
 			    break;
@@ -119,11 +119,11 @@ public class Tree<Type> {
 		return res;
 	}
 	// With flag to add or remove
-	public List<Integer> inOrderIterative_2(TreeNode root) {
-		List < Integer > res = new ArrayList < > ();
+	public List<Type> inOrderIterative_2(Node<Type> root) {
+		List <Type> res = new ArrayList <>();
 
 		if(root == null) return res;
-		Stack<TreeNode> stack = new Stack<TreeNode>();
+		Stack<Node> stack = new Stack<Node>();
 		stack.add(root);
 		boolean add_new = (stack.peek().left!=null);
 		while(!stack.isEmpty())
@@ -133,25 +133,25 @@ public class Tree<Type> {
 				add_new = (stack.peek().left!=null);
 			}
 			else{
-				TreeNode popedTreeNode = stack.pop();
-				res.add(popedTreeNode.val);
+				Node<Type> popedTreeNode = stack.pop();
+				res.add(popedTreeNode.data);
 				if(popedTreeNode.right != null){
 				    stack.push(popedTreeNode.right);
 				    add_new = (stack.peek().left!=null);
 				}else{
 				    add_new = false;
 				}
-
 			}
 		}
 		return res;
 	}
 	
 	public void inOrderIterativeMorrisTraversal(Node<Type> root){
-	//inorder without recursion and without stack page 6
-	//MorrisTraversal
-	//http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
+		//inorder without recursion and without stack page 6
+		//MorrisTraversal
+		//http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
 	}
+
 	public void preOrderIterative(Node<Type> root) {
 		Stack<Node<Type>> stack = new Stack<Node<Type>>();
 		stack.push(root);
@@ -165,9 +165,10 @@ public class Tree<Type> {
 				stack.push(popedTreeNode.left);
 		}
 	}
+
 	public void postOrderIterative(Node<Type> root) {
-		Stack<Node<Type>> unProcessedStack = new Stack<Node<Type>>();
-		Stack<Node<Type>> processedStack = new Stack<Node<Type>>();
+		Stack<Node<Type>> unProcessedStack = new Stack();
+		Stack<Node<Type>> processedStack = new Stack();
 		unProcessedStack.push(root);
 		while(!unProcessedStack.isEmpty())
 		{
@@ -1114,17 +1115,17 @@ public class Tree<Type> {
 	}
 	// recurssion with global variable
 	private void __connectInOrderSuccessorLink(Node<Type> root, AtomicReference<Node<Type>> prev) {
-		if(root == null) return;
-		__connectInOrderSuccessorLink(root.left, toBelinked);
-		if (prev.get()!=null) prev.get().inOrdSucc = root;
-		prev.get() = root;
-		__connectInOrderSuccessorLink(root.right, toBelinked);
+//		if(root == null) return;
+//		__connectInOrderSuccessorLink(root.left, prev);
+//		if (prev.get()!=null) prev.get().inOrdSucc = root;
+//		prev.get() = root;
+//		__connectInOrderSuccessorLink(root.right, prev);
 	}
 	public void connectInOrderSuccessorLink(Node<Type> root) {
-		//_connectInOrderSucessorLink(root); // own
-	        AtomicReference<Node<Type>> prev = new AtomicReference<Node<Type>>();
-		prev.set(null);
-		__connectInOrderSuccessorLink(root, holder);
+//		//_connectInOrderSucessorLink(root); // own
+//	        AtomicReference<Node<Type>> prev = new AtomicReference<Node<Type>>();
+//		prev.set(null);
+//		__connectInOrderSuccessorLink(root, holder);
 	}
 	private void _verticalSum(Node<Integer> root,int where, ds.linkedlist.Doubly.Node<Integer> node,DoublyLinkedList<Integer> dLL ) {
 		if(root == null)

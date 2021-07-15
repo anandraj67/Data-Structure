@@ -1,11 +1,11 @@
-package prob.fk.chess;
+package design_code.chess;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Simulator 
+public class MainRunner
 {
 	public static void main(String[] args)
 	{

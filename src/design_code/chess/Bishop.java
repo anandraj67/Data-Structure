@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class Bishop extends Piece 
+public class Bishop extends Piece
 {
 	public static final String nameCode = "B";
 	public Bishop(String colorCode) 

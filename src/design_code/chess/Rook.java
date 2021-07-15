@@ -1,6 +1,6 @@
-package prob.fk.chess;
+package design_code.chess;
 
-public class Rook extends Piece 
+public class Rook extends Piece
 {
 	public static final String nameCode = "R";
 	public Rook(String colorCode) 
