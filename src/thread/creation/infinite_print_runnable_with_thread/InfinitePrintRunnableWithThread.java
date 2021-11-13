@@ -1,8 +1,8 @@
-package thread.creation;
+package thread.creation.infinite_print_runnable_with_thread;
 
-public class MyRunnableAndThread implements Runnable {
+public class InfinitePrintRunnableWithThread implements Runnable {
 	Thread thread;
-	public MyRunnableAndThread(String name) {
+	public InfinitePrintRunnableWithThread(String name) {
 		thread = new Thread(this,name);
 	}
 	@Override

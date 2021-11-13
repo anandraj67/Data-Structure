@@ -1,4 +1,4 @@
-package thread.creation;
+package thread.creation.finite_print_runnable;
 
 public class FinitePrintRunnable implements Runnable {
 
