@@ -1,8 +1,8 @@
-package thread.creation.infinite_print_runnable_with_thread;
+package thread.creation.countdown_print_runnable_with_thread;
 
-public class InfinitePrintRunnableWithThread implements Runnable {
+public class CountdownPrinter implements Runnable {
 	Thread thread;
-	public InfinitePrintRunnableWithThread(String name) {
+	public CountdownPrinter(String name) {
 		thread = new Thread(this,name);
 	}
 	@Override

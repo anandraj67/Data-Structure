@@ -1,4 +1,4 @@
-package thread.creation.infinite_print_thread;
+package thread.creation.countdown_print_thread;
 
 public class MainRunner {
     public static void main(String[] args) {

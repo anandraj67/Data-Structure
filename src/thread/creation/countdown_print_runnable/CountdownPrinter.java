@@ -1,9 +1,9 @@
-package thread.creation.finite_print_runnable;
+package thread.creation.countdown_print_runnable;
 
-public class FinitePrintRunnable implements Runnable {
+public class CountdownPrinter implements Runnable {
 
 	int count;
-	public FinitePrintRunnable(int count) {
+	public CountdownPrinter(int count) {
 		this.count = count;
 	}
 
