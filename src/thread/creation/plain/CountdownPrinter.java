@@ -1,4 +1,4 @@
-package thread.creation.countdown_print_pojo;
+package thread.creation.plain;
 
 public class CountdownPrinter {
     int count;

@@ -1,4 +1,4 @@
-package thread.creation.countdown_print_runnable_with_thread;
+package thread.creation.implement_runnable_with_thread;
 
 public class CountdownPrinter implements Runnable {
 	Thread thread;

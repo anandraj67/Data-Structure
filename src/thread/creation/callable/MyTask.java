@@ -2,7 +2,7 @@ package thread.creation.callable;
 
 import java.util.concurrent.Callable;
 
-public class Calculator implements Callable<Integer> {
+public class MyTask implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
