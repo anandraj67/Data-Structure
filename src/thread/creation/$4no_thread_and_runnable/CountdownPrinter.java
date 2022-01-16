@@ -1,4 +1,4 @@
-package thread.creation.plain;
+package thread.creation.$4no_thread_and_runnable;
 
 public class CountdownPrinter {
     int count;

@@ -56,9 +56,7 @@ public class Solution {
         singleLinkedList.insert_end(new Node(3));
         singleLinkedList.insert_end(new Node(4));
         singleLinkedList.insert_end(new Node(5));
-        singleLinkedList.insert_end(new Node(6));
-        singleLinkedList.insert_end(new Node(7));
-        singleLinkedList.insert_end(new Node(8));
+
 
         singleLinkedList.print();
         Solution solution = new Solution();

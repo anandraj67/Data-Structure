@@ -1,4 +1,4 @@
-package thread.creation.extending_thread;
+package thread.creation.$1extending_thread;
 
 public class InfinitePrintThread extends Thread {
 	public InfinitePrintThread(String name) {

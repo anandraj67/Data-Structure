@@ -1,4 +1,4 @@
-package thread.creation.extending_thread;
+package thread.creation.$1extending_thread;
 
 public class MainRunner {
     public static void main(String[] args) {

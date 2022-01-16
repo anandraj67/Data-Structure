@@ -1,8 +1,8 @@
-package thread.creation.implement_runnable;
+package thread.creation.$2implement_runnable;
 
-public class MyTask implements Runnable {
+public class MyRunnable implements Runnable {
 
-	public MyTask() {
+	public MyRunnable() {
 	}
 
 	@Override

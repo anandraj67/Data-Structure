@@ -1,9 +1,6 @@
-package thread.creation.implement_runnable_and_executor;
+package thread.creation.$5custom_per_thread_executor;
 
-import java.util.concurrent.Callable;
 import java.util.concurrent.Executor;
-import java.util.concurrent.Future;
-import java.util.concurrent.FutureTask;
 
 public class PerThreadExecutor implements Executor {
     @Override
