@@ -21,22 +21,18 @@ public class Solution {
         int k = chunkSize;
         boolean isFirstPass = true;
         // (1 2 3) (4 5 6) (7 8 9 ) 8 3
-        while(second != null)
-        {
+        while(second != null) {
             third = second.next;
             second.next = first;
             first = second;
             second = third;
             k--;
-            if(k==0 || second == null)
-            {
-                if(isFirstPass == true)
-                {
+            if(k==0 || second == null) {
+                if(isFirstPass == true) {
                     head = first;
                     isFirstPass = false;
                 }
-                else
-                {
+                else {
                     chunkFirst.next = first;
                     chunkFirst = chunkSecond;
                 }
@@ -45,8 +41,29 @@ public class Solution {
                 first = null;
             }
         }
-
         return head;
+    }
+
+    public Node<Integer> reverseInChunkIterRecur(Node<Integer> head, int chunkSize){
+        Node prev = null;
+        Node curr = head;
+        Node next;
+        int c = 0;
+        while(curr !=null && c < chunkSize) 		// because connection of second and
+        {							// first is to be reversed
+            next = curr.next;
+            curr.next = prev;
+
+            prev = curr;		// Increment
+            curr = next;
+            c++;
+        }
+        if(curr != null){
+            Node<Integer> nodeRet = reverseInChunkIterRecur(curr, chunkSize);
+            head.next = nodeRet;
+        }
+
+        return prev;
     }
 
     public static void main(String[] args) {
@@ -60,7 +77,7 @@ public class Solution {
 
         singleLinkedList.print();
         Solution solution = new Solution();
-        singleLinkedList.head = solution.reverseInChunkIterIter(singleLinkedList.head ,3);
+        singleLinkedList.head = solution.reverseInChunkIterRecur(singleLinkedList.head ,3);
         System.out.println("After reversal");
         singleLinkedList.print();
     }
