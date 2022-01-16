@@ -6,15 +6,15 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class Tree<Type> {
-	public Node<Type> root;
+	public TreeNode<Type> root;
 
 	public Tree(){
 		root = null;
 	}
-	public Node<Type> createTree() {
+	public TreeNode<Type> createTree() {
 		Scanner in = new Scanner(System.in);
 		System.out.print("Enter node's data ");
-		Node<Type> treeNodeRef = new Node(in.nextInt());
+		TreeNode<Type> treeNodeRef = new TreeNode(in.nextInt());
 		if(root == null)
 		{
 			root = treeNodeRef;
@@ -33,21 +33,14 @@ public class Tree<Type> {
 		//in.close();
 		return treeNodeRef;
 	}
-	public int size(Node<Type> root) {
+	public int size(TreeNode<Type> root) {
 		if (root==null)
 			return 0;
 		else
 			return 1+ size(root.left) + size(root.right);
 	}
-	private int height(Node<Type> root) {
-	   if (root==null)
-           return 0;
-	   else
-	   {
-           return Math.max(height(root.left), height(root.right))+1;
-	   }
-	}
-	public int countLeaves(Node<Type> root) {
+
+	public int countLeaves(TreeNode<Type> root) {
 		if(root==null)
 			return 0;
 		if(root.left == null && root.right ==null)
@@ -55,21 +48,21 @@ public class Tree<Type> {
 		else
 			return countLeaves(root.left) + countLeaves(root.right);
 	}
-    public boolean isPresent(Node<Integer> root,Integer key) {
+    public boolean isPresent(TreeNode<Integer> root, Integer key) {
         if(root==null)
             return false;
         if(root.data == key)
             return true;
         return isPresent(root.left, key) || isPresent(root.right, key);
     }
-    public boolean isIdentical(Node<Type> root1,Node<Type> root2) {
+    public boolean isIdentical(TreeNode<Type> root1, TreeNode<Type> root2) {
         if(root1 == null && root2== null)
             return true;
         if(root1 != null && root2 != null)
             return ( (root1.data == root2.data) && isIdentical(root1.left,root2.left) && isIdentical(root2.right,root2.right));
         return false;
     }
-	public void inOrderRecur(Node<Type> root) {
+	public void inOrderRecur(TreeNode<Type> root) {
 		if(root!= null)
 		{
 			inOrderRecur(root.left);
@@ -77,7 +70,7 @@ public class Tree<Type> {
 			inOrderRecur(root.right);
 		}
 	}
-	public void postOrderRecur(Node<Type> root) {
+	public void postOrderRecur(TreeNode<Type> root) {
 		if(root!= null)
 		{
 			postOrderRecur(root.left);
@@ -85,7 +78,7 @@ public class Tree<Type> {
 			System.out.print(root.data + " ");
 		}
 	}
-	public void preOrderRecur(Node<Type> root) {
+	public void preOrderRecur(TreeNode<Type> root) {
         if(root!= null)
         {
             System.out.print(root.data + " ");
@@ -94,11 +87,11 @@ public class Tree<Type> {
         }
     }
 	// With nested while loop
-	public List <Type> inOrderIterative(Node<Type> root) {
+	public List <Type> inOrderIterative(TreeNode<Type> root) {
 		List < Type > res = new ArrayList < > ();
 
 		if(root == null) return res;
-			Stack<Node<Type>> stack = new Stack<Node<Type>>();
+			Stack<TreeNode<Type>> stack = new Stack<TreeNode<Type>>();
 			stack.add(root);
 		while(!stack.isEmpty())
 		{
@@ -107,7 +100,7 @@ public class Tree<Type> {
 		    }
 
 		    while(!stack.isEmpty()){
-			Node<Type> popedTreeNode = stack.pop();
+			TreeNode<Type> popedTreeNode = stack.pop();
 			res.add(popedTreeNode.data);
 			if(popedTreeNode.right != null){
 			    stack.push(popedTreeNode.right);
@@ -119,11 +112,11 @@ public class Tree<Type> {
 		return res;
 	}
 	// With flag to add or remove
-	public List<Type> inOrderIterative_2(Node<Type> root) {
+	public List<Type> inOrderIterative_2(TreeNode<Type> root) {
 		List <Type> res = new ArrayList <>();
 
 		if(root == null) return res;
-		Stack<Node> stack = new Stack<Node>();
+		Stack<TreeNode> stack = new Stack<TreeNode>();
 		stack.add(root);
 		boolean add_new = (stack.peek().left!=null);
 		while(!stack.isEmpty())
@@ -133,7 +126,7 @@ public class Tree<Type> {
 				add_new = (stack.peek().left!=null);
 			}
 			else{
-				Node<Type> popedTreeNode = stack.pop();
+				TreeNode<Type> popedTreeNode = stack.pop();
 				res.add(popedTreeNode.data);
 				if(popedTreeNode.right != null){
 				    stack.push(popedTreeNode.right);
@@ -146,18 +139,18 @@ public class Tree<Type> {
 		return res;
 	}
 	
-	public void inOrderIterativeMorrisTraversal(Node<Type> root){
+	public void inOrderIterativeMorrisTraversal(TreeNode<Type> root){
 		//inorder without recursion and without stack page 6
 		//MorrisTraversal
 		//http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
 	}
 
-	public void preOrderIterative(Node<Type> root) {
-		Stack<Node<Type>> stack = new Stack<Node<Type>>();
+	public void preOrderIterative(TreeNode<Type> root) {
+		Stack<TreeNode<Type>> stack = new Stack<TreeNode<Type>>();
 		stack.push(root);
 		while(!stack.isEmpty())
 		{
-			Node<Type> popedTreeNode = stack.pop();
+			TreeNode<Type> popedTreeNode = stack.pop();
 			System.out.print(popedTreeNode.data + " ");
 			if(popedTreeNode.right != null)
 				stack.push(popedTreeNode.right);
@@ -166,13 +159,13 @@ public class Tree<Type> {
 		}
 	}
 
-	public void postOrderIterative(Node<Type> root) {
-		Stack<Node<Type>> unProcessedStack = new Stack();
-		Stack<Node<Type>> processedStack = new Stack();
+	public void postOrderIterative(TreeNode<Type> root) {
+		Stack<TreeNode<Type>> unProcessedStack = new Stack();
+		Stack<TreeNode<Type>> processedStack = new Stack();
 		unProcessedStack.push(root);
 		while(!unProcessedStack.isEmpty())
 		{
-			Node<Type> popedTreeNode = unProcessedStack.pop();
+			TreeNode<Type> popedTreeNode = unProcessedStack.pop();
 			processedStack.push(popedTreeNode);
 			if(popedTreeNode.left != null)
 				unProcessedStack.push(popedTreeNode.left);
@@ -184,12 +177,12 @@ public class Tree<Type> {
 			System.out.print(processedStack.pop().data + " " );
 		}
 	}
-	public void levelOrderIterative(Node<Type> root) {
-		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
+	public void levelOrderIterative(TreeNode<Type> root) {
+		Queue<TreeNode<Type>> queue = new LinkedList<TreeNode<Type>>();
 		queue.add(root);
 		while(!queue.isEmpty())
 		{
-			Node<Type> removedNoded = queue.remove();
+			TreeNode<Type> removedNoded = queue.remove();
 			System.out.print(removedNoded.data + " ");
 			if(removedNoded.left != null)
 			{
@@ -201,34 +194,17 @@ public class Tree<Type> {
 			}
 		}
 	}
-	private void _oneLevelRecursive(Node<Type> root, int level, int levelToPrint) {
-        // called from levelOrderRec
-		if(levelToPrint == level)
-			System.out.print(root.data);
-		else
-		{
-			if(root.left != null)
-				_oneLevelRecursive(root.left, level + 1, levelToPrint);
-			if(root.right != null)
-				_oneLevelRecursive(root.right, level + 1, levelToPrint);
-		}
-	}
-	public void levelOrderRec(Node<Type> root) {
-		for (int i=0;i<height(root);i++)
-		{
-			_oneLevelRecursive(root, 0, i);
-		}
-	}
-    public void spiralOrder(Node<Type> root) {
-        Stack<Node<Type>> stack1 = new Stack<Node<Type>>();//LR
-        Stack<Node<Type>> stack2 = new Stack<Node<Type>>();//RL
+
+    public void spiralOrder(TreeNode<Type> root) {
+        Stack<TreeNode<Type>> stack1 = new Stack<TreeNode<Type>>();//LR
+        Stack<TreeNode<Type>> stack2 = new Stack<TreeNode<Type>>();//RL
         stack1.push(root);
 
         while( !stack1.isEmpty() || !stack2.isEmpty() )
         {
             while(!stack1.isEmpty())
             {
-                Node<Type> popedNode = stack1.pop();
+                TreeNode<Type> popedNode = stack1.pop();
                 System.out.print(popedNode.data + " ");
                 if(popedNode.right!= null)
                     stack2.push(popedNode.right);
@@ -237,7 +213,7 @@ public class Tree<Type> {
             }
             while(!stack2.isEmpty())
             {
-                Node<Type> popedNode = stack2.pop();
+                TreeNode<Type> popedNode = stack2.pop();
                 System.out.print(popedNode.data + " ");
                 if(popedNode.left!= null)
                     stack1.push(popedNode.left);
@@ -246,33 +222,8 @@ public class Tree<Type> {
             }
         }
     }
-    public int width(Node<Type> root) {
-        // With dummy node
-        if (root ==  null)
-            return 0;
-        int width = 1;
-        Queue<Node> queue = new LinkedList<Node>();
-        queue.add(root);
-        queue.add(null);
-        while (!queue.isEmpty()){
-            Node removedNode = queue.remove();
-            if (removedNode == null){
-                width = Math.max(width, queue.size());
-                if(!queue.isEmpty()){
-                    queue.add(null);
-                }
-            }else {
-                if(removedNode.left != null){
-                    queue.add(removedNode.left);
-                }
-                if(removedNode.right != null){
-                    queue.add(removedNode.right);
-                }
-            }
-        }
-        return width;
-    }
-    private int _diameter2(Node<Type> root,Integer [] maxDiameter) {
+
+    private int _diameter2(TreeNode<Type> root, Integer [] maxDiameter) {
         if(root==null)
             return 0;
         if(root.left == null && root.right ==null)
@@ -290,13 +241,13 @@ public class Tree<Type> {
         else
             return retLeft+1;
     }
-    public int diameter2(Node<Type> root) {
+    public int diameter2(TreeNode<Type> root) {
         Integer []maxDiameter = new Integer[1];
         maxDiameter[0] = 0;
         _diameter2(root, maxDiameter);
         return maxDiameter[0];
     }
-    private int[] _diameter(Node<Type> root) {
+    private int[] _diameter(TreeNode<Type> root) {
         // returns height and diameter
         if(root==null)
         {
@@ -317,10 +268,10 @@ public class Tree<Type> {
 
         return toRet;
     }
-    public int diameter(Node<Type> root) {
+    public int diameter(TreeNode<Type> root) {
         return _diameter(root)[1];
     }
-	public boolean isSubTree(Node<Type> rootS, Node<Type> rootM) {
+	public boolean isSubTree(TreeNode<Type> rootS, TreeNode<Type> rootM) {
 		if(rootS == null)
 			return true;
 		if(rootM == null)
@@ -331,7 +282,7 @@ public class Tree<Type> {
 		}
 		return isSubTree(rootS, rootM.left) || isSubTree(rootS, rootM.right);
 	}
-	private boolean _isHeightBalanced(Node<Type> root,int heightNow,int [] heightAvg) {
+	private boolean _isHeightBalanced(TreeNode<Type> root, int heightNow, int [] heightAvg) {
 		if(root==null)
 			return true;
 		if(root.left == null && root.right == null)
@@ -345,69 +296,23 @@ public class Tree<Type> {
 		}
 		return ( _isHeightBalanced(root.left,heightNow+1, heightAvg) && _isHeightBalanced(root.right,heightNow+1, heightAvg));
 	}
-	public boolean isHeightBalanced(Node<Type> root) {
+	public boolean isHeightBalanced(TreeNode<Type> root) {
         // every node sud be almost(diff of one) equal distance from root
 		int []heightAvg = new int[1];
 		heightAvg[0]= -1;
 		return _isHeightBalanced(root,0,heightAvg);
 	}
-	public boolean isCompleteTree(Node<Type> root) {
-		if(root == null)
-			return true;
-		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
-		queue.add(root);
-		queue.add(null);
 
-		boolean halfFilled = false;
-		while(!queue.isEmpty())
-		{
-			Node<Type> removedNode = queue.remove();
-			if(removedNode == null)
-			{
-				if(!queue.isEmpty())
-					queue.add(null);
-			}
-			else
-			{
-				if(removedNode.left != null && !halfFilled)
-				{
-					queue.add(removedNode.left);
-				}
-				else if(removedNode.left == null && !halfFilled)
-				{
-					halfFilled = true;
-				}
-				else if(removedNode.left != null && halfFilled)
-				{
-					return false;
-				}
-
-				if(removedNode.right != null && !halfFilled)
-				{
-					queue.add(removedNode.right);
-				}
-				else if(removedNode.right == null && !halfFilled)
-				{
-					halfFilled = true;
-				}
-				else if(removedNode.right != null && halfFilled)
-				{
-					return false;
-				}
-			}
-		}
-		return true;
-	}
-	public Node<Type> mirror(Node<Type> root) {
+	public TreeNode<Type> mirror(TreeNode<Type> root) {
 		if(root == null)
 			return root;
 
-		Node<Type> temp = root.left;
+		TreeNode<Type> temp = root.left;
 		root.left = mirror(root.right);
 		root.right = mirror(temp);
 		return root;
 	}
-    public boolean isChildrenSumProperty(Node<Integer> root) {
+    public boolean isChildrenSumProperty(TreeNode<Integer> root) {
         //every node sum of its children nodes
         if(root == null || (root.left==null && root.right == null))
             return true;
@@ -418,17 +323,17 @@ public class Tree<Type> {
             sum+= root.right.data;
         return isChildrenSumProperty(root.left) && isChildrenSumProperty(root.right) && (root.data == sum);
     }
-	public void leftView(Node<Type> root) {
+	public void leftView(TreeNode<Type> root) {
 		// can be done with 1 queue with dummy node
-		Queue<Node<Type>> queue1 = new LinkedList<Node<Type>>();
-		Queue<Node<Type>> queue2 = new LinkedList<Node<Type>>();
+		Queue<TreeNode<Type>> queue1 = new LinkedList<TreeNode<Type>>();
+		Queue<TreeNode<Type>> queue2 = new LinkedList<TreeNode<Type>>();
 		queue1.add(root);
 		boolean flag = true;
 		while( !queue1.isEmpty() || !queue2.isEmpty() )
 		{
 			while(!queue1.isEmpty())
 			{
-				Node<Type> removedNode = queue1.remove();
+				TreeNode<Type> removedNode = queue1.remove();
 				if(flag)
 				{
 					System.out.print(removedNode.data + " ");
@@ -442,7 +347,7 @@ public class Tree<Type> {
 			while(!queue2.isEmpty())
 			{
 
-				Node<Type> removedNode = queue2.remove();
+				TreeNode<Type> removedNode = queue2.remove();
 				if(!flag)
 				{
 					System.out.print(removedNode.data + " ");
@@ -455,7 +360,7 @@ public class Tree<Type> {
 			}
 		}
 	}
-    boolean _checkAllLeafAtSameLevel(Node<Type> root, int level, AtomicReference<Integer> leafLevel) {
+    boolean _checkAllLeafAtSameLevel(TreeNode<Type> root, int level, AtomicReference<Integer> leafLevel) {
         if (root == null)
             return true;
         if (root.left == null && root.right == null){
@@ -468,12 +373,12 @@ public class Tree<Type> {
         return _checkAllLeafAtSameLevel(root.left, level+1, leafLevel) &&
                 _checkAllLeafAtSameLevel(root.right, level+1, leafLevel);
     }
-    boolean checkAllLeafAtSameLevel(Node<Type> root) {
+    boolean checkAllLeafAtSameLevel(TreeNode<Type> root) {
         AtomicReference leafLevel = new AtomicReference();
         leafLevel.set(0);
         return _checkAllLeafAtSameLevel(root, 0, leafLevel);
     }
-	boolean _isBST(Node<Integer> root,int min,int max) {
+	boolean _isBST(TreeNode<Integer> root, int min, int max) {
 
 		if(root==null)
 			return true;
@@ -483,11 +388,11 @@ public class Tree<Type> {
 		}
 		return false;
 	}
-	public boolean isBST(Node<Integer> root)
+	public boolean isBST(TreeNode<Integer> root)
 	{
 		return _isBST(root,-999,999);
 	}
-	public Node<Integer> findInBST(Node<Integer> root,Integer key) {
+	public TreeNode<Integer> findInBST(TreeNode<Integer> root, Integer key) {
 		if(root==null)
 			return null;
 		if(root.data == key)
@@ -504,7 +409,7 @@ public class Tree<Type> {
 		}
 
 	}
-	public Node<Integer> minimumInBST(Node<Integer> root) {
+	public TreeNode<Integer> minimumInBST(TreeNode<Integer> root) {
         // can be also by iteration by stack
 		if(root == null)
 			return null;
@@ -512,7 +417,7 @@ public class Tree<Type> {
 			return root;
 		return minimumInBST(root.left);
 	}
-	public Node<Integer> maximumInBST(Node<Integer> root) {
+	public TreeNode<Integer> maximumInBST(TreeNode<Integer> root) {
         // can be also by recursion by stack
 		if(root == null)
 			return null;
@@ -522,7 +427,7 @@ public class Tree<Type> {
 		}
 		return root;
 	}
-	public Node<Integer> ceilInBST(Node<Integer> root,Integer key) {
+	public TreeNode<Integer> ceilInBST(TreeNode<Integer> root, Integer key) {
 		if(root==null)
 			return null;
 		if(root.data == key)
@@ -531,17 +436,17 @@ public class Tree<Type> {
 			return ceilInBST(root.right, key);
 		else// if(root.data > key)
 		{
-			Node<Integer> retLeft = ceilInBST(root.left, key);
+			TreeNode<Integer> retLeft = ceilInBST(root.left, key);
 			if(retLeft == null)
 				return root;
 			else
 				return retLeft;
 		}
 	}
-	public Node<Integer> inOrderSuccessorBST (Node<Integer> root,Integer value) {
+	public TreeNode<Integer> inOrderSuccessorBST (TreeNode<Integer> root, Integer value) {
 		if(root == null)
 			return null;
-		Node<Integer> rem = null;
+		TreeNode<Integer> rem = null;
 		while(root!=null && root.data != value)
 		{
 			if(root.data < value)
@@ -566,18 +471,18 @@ public class Tree<Type> {
 
 		return root;
 	}
-	public Node<Type> kSmallestElementInBST (Node<Type> root,Integer k) {
+	public TreeNode<Type> kSmallestElementInBST (TreeNode<Type> root, Integer k) {
         // iterative approach to inorder.
-		Stack<Node<Type>> leftProcessedStack = new Stack<Node<Type>>();
-		Stack<Node<Type>> leftUnProcessedStack = new Stack<Node<Type>>();
+		Stack<TreeNode<Type>> leftProcessedStack = new Stack<TreeNode<Type>>();
+		Stack<TreeNode<Type>> leftUnProcessedStack = new Stack<TreeNode<Type>>();
 		leftUnProcessedStack.push(root);
 
-		Node<Type> ans = null;
+		TreeNode<Type> ans = null;
 		while(!leftProcessedStack.isEmpty() || !leftUnProcessedStack.isEmpty())
 		{
 			if(!leftUnProcessedStack.isEmpty())
 			{
-				Node<Type> popedTreeNode = leftUnProcessedStack.pop();
+				TreeNode<Type> popedTreeNode = leftUnProcessedStack.pop();
 				leftProcessedStack.push(popedTreeNode);
 				if(popedTreeNode.left != null)
 					leftUnProcessedStack.push(popedTreeNode.left);
@@ -585,7 +490,7 @@ public class Tree<Type> {
 			else
 			{
 				k--;
-				Node<Type> popedTreeNode = leftProcessedStack.pop();
+				TreeNode<Type> popedTreeNode = leftProcessedStack.pop();
 				if(k == 0)
 					ans = popedTreeNode;
 				if(popedTreeNode.right != null)
@@ -594,7 +499,7 @@ public class Tree<Type> {
 		}
 		return ans;
 	}
-	private Integer[]  _largestBSTSubtreeSizeInBinaryTree (Node<Integer> root) {
+	private Integer[]  _largestBSTSubtreeSizeInBinaryTree (TreeNode<Integer> root) {
 		Integer[] arrToRet = new Integer[4];
 		if(root == null)
 		{
@@ -630,7 +535,7 @@ public class Tree<Type> {
 
 		return arrToRet;
 	}
-	public int largestBSTSubtreeSizeInBinaryTree (Node<Integer> root) {
+	public int largestBSTSubtreeSizeInBinaryTree (TreeNode<Integer> root) {
 
 		Integer[] arrRec = new Integer[4];
 		arrRec = _largestBSTSubtreeSizeInBinaryTree(root);
@@ -660,13 +565,13 @@ public class Tree<Type> {
 
 		return toRet;
 	}
-	private void _rootToLeafPath(Node<Type> root,SingleLinkedList<Node<Type>> path) {
+	private void _rootToLeafPath(TreeNode<Type> root, SingleLinkedList<TreeNode<Type>> path) {
 		if(root!=null)
 		{
-			path.insert_end(new ds.linkedlist.singly.Node<Node<Type>>(root));
+			path.insert_end(new ds.linkedlist.singly.Node<TreeNode<Type>>(root));
 			if(root.left == null && root.right == null)
 			{
-				ds.linkedlist.singly.Node<Node<Type>> iterator = path.head;
+				ds.linkedlist.singly.Node<TreeNode<Type>> iterator = path.head;
 				while(iterator != null)
 				{
 					System.out.print(iterator.data.data + " ");
@@ -680,10 +585,10 @@ public class Tree<Type> {
 		}
 	}
 	public void rootToLeafPath() {
-		SingleLinkedList<Node<Type>> path = new SingleLinkedList<Node<Type>>();
+		SingleLinkedList<TreeNode<Type>> path = new SingleLinkedList<TreeNode<Type>>();
 		_rootToLeafPath(root,path );
 	}
-	private int _treePathsSum(Node<Integer> root, int val) {
+	private int _treePathsSum(TreeNode<Integer> root, int val) {
 	    if (root == null)  return 0;
 
 	    val = val*10 + root.data;
@@ -694,11 +599,11 @@ public class Tree<Type> {
 	    return _treePathsSum(root.left, val) +
 	           _treePathsSum(root.right, val);
 	}
-	int treePathsSum(Node<Integer> root) {
+	int treePathsSum(TreeNode<Integer> root) {
 	    // Pass the initial value as 0 as there is nothing above root
 	    return _treePathsSum(root, 0);
 	}
-	public boolean printAncestor(Node<Type> root,Type key) {
+	public boolean printAncestor(TreeNode<Type> root, Type key) {
 		if(root == null)
 			return false;
 		if(root.data == key)
@@ -717,7 +622,7 @@ public class Tree<Type> {
 		}
 		return false;
 	}
- 	public Node<Integer> lowestCommonAncestorInBST(Node<Integer> root,Integer a, Integer b) {
+ 	public TreeNode<Integer> lowestCommonAncestorInBST(TreeNode<Integer> root, Integer a, Integer b) {
 		if(a > b || root == null)
 			return null;
 		if(root.data > b)
@@ -734,13 +639,13 @@ public class Tree<Type> {
 		}
 
 	}
- 	private Node<Integer> __lowestCommonAncestor(Node<Integer> root,Integer a, Integer b) {
+ 	private TreeNode<Integer> __lowestCommonAncestor(TreeNode<Integer> root, Integer a, Integer b) {
 		if(root == null)
 			return null;
 		if(root.data == a || root.data == b)
 			return root;
-		Node<Integer> retLeft = __lowestCommonAncestor(root.left, a, b);
-		Node<Integer> retRight  = __lowestCommonAncestor(root.right, a, b);
+		TreeNode<Integer> retLeft = __lowestCommonAncestor(root.left, a, b);
+		TreeNode<Integer> retRight  = __lowestCommonAncestor(root.right, a, b);
 		if(retRight != null && retLeft != null)
 			return root;
 		if(retLeft == null)
@@ -748,7 +653,7 @@ public class Tree<Type> {
 		else//if(retRight == null)
 			return retLeft;
 	}
-	private ArrayList<Object> _lowestCommonAncestor(Node<Integer> root,Integer a, Integer b) {
+	private ArrayList<Object> _lowestCommonAncestor(TreeNode<Integer> root, Integer a, Integer b) {
 		if(root == null)
 			return null;
 		if(root.data == a )
@@ -795,20 +700,20 @@ public class Tree<Type> {
 		else//if(retRight == null)
 			return retLeft;
 	}
-	public Node<Integer> lowestCommonAncestor(Node<Integer> root,Integer a, Integer b) {
-		return (Node<Integer>)_lowestCommonAncestor(root, a, b).get(0);
+	public TreeNode<Integer> lowestCommonAncestor(TreeNode<Integer> root, Integer a, Integer b) {
+		return (TreeNode<Integer>)_lowestCommonAncestor(root, a, b).get(0);
 //		if(isPresent(root, a) && isPresent(root, b))
 //			return __lowestCommonAncestor(root, a, b);
 //		else
 //			return null;
 	}
-	public void convertToChildrenSumProperty(Node<Integer> root){
+	public void convertToChildrenSumProperty(TreeNode<Integer> root){
         //convertToChildrenSumProp // http://www.geeksforgeeks.org/convert-an-arbitrary-binary-tree-to-a-tree-that-holds-children-sum-property/
     }
-    public void convertToChildrenSumPropWithIncrOnly(Node<Integer> root) {
+    public void convertToChildrenSumPropWithIncrOnly(TreeNode<Integer> root) {
         return;
 	}
- 	void convertTree(Node<Integer> node) {
+ 	void convertTree(TreeNode<Integer> node) {
         // This function changes a tree to to hold children sum property
 	    int left_data = 0,  right_data = 0, diff;
 
@@ -841,7 +746,7 @@ public class Tree<Type> {
                 _incrementSubtree(node, -diff);  // -diff is used to make diff positive
         }
 	}
-	private void _incrementSubtree(Node<Integer> node, int diff) {
+	private void _incrementSubtree(TreeNode<Integer> node, int diff) {
         /* This function is used to increment subtree by diff */
 	    if(node.left != null) // first try left
 	    {
@@ -854,7 +759,7 @@ public class Tree<Type> {
 	        _incrementSubtree(node.right, diff);
 	    }
 	}
-	public void printKdistantNodesDown(Node<Integer> root,int k) {
+	public void printKdistantNodesDown(TreeNode<Integer> root, int k) {
 		if(root == null || k < 0)
 			return;
 
@@ -869,7 +774,7 @@ public class Tree<Type> {
 			printKdistantNodesDown(root.right, k-1);
 		}
 	}
-	public int printAllKdistantNodesFromTarget(Node<Integer> root,int k,int target) {
+	public int printAllKdistantNodesFromTarget(TreeNode<Integer> root, int k, int target) {
 		if(root == null || k < 0)
 			return -1;
 		if(target == root.data)
@@ -904,13 +809,13 @@ public class Tree<Type> {
 		}
 		return -1;
 	}
-	private Node<Integer> _makeTreeFromInOrderAndPreOrder(Integer [] inOrder,Integer [] preOrder, int startInOrder, int endInOrder,AtomicReference<Integer> preOrderIndexRef) {
+	private TreeNode<Integer> _makeTreeFromInOrderAndPreOrder(Integer [] inOrder, Integer [] preOrder, int startInOrder, int endInOrder, AtomicReference<Integer> preOrderIndexRef) {
 		if( preOrderIndexRef.get() > preOrder.length-1)
 			return null;
 		int index = _searchIndex(inOrder, preOrder[preOrderIndexRef.get()], startInOrder, endInOrder);
 		if(index == -1  )
 			return null;
-		Node<Integer> newNode = new Node<Integer>(preOrder[preOrderIndexRef.get()]);
+		TreeNode<Integer> newNode = new TreeNode<Integer>(preOrder[preOrderIndexRef.get()]);
 		preOrderIndexRef.set(preOrderIndexRef.get()+1);
 		newNode.left = _makeTreeFromInOrderAndPreOrder(inOrder, preOrder, startInOrder, index-1, preOrderIndexRef);
 		newNode.right = _makeTreeFromInOrderAndPreOrder(inOrder, preOrder, index+1, endInOrder, preOrderIndexRef);
@@ -924,13 +829,13 @@ public class Tree<Type> {
 		treeRef.root =  _makeTreeFromInOrderAndPreOrder(inOrder, preOrder, 0, inOrder.length-1,preOrderIndexRef);
 		return treeRef;
 	}
-	private Node<Integer> _makeTreeFromPreOrderRec(int [] pre,AtomicReference<Integer> index,int max,int min) {
+	private TreeNode<Integer> _makeTreeFromPreOrderRec(int [] pre, AtomicReference<Integer> index, int max, int min) {
         //10, 5, 1, 7, 40, 50
 		if(index.get() >= pre.length )
 			return null;
 		if( pre[index.get()] < max && pre[index.get()] > min )
 		{
-			Node<Integer> newNode = new Node<Integer>(pre[index.get()]);
+			TreeNode<Integer> newNode = new TreeNode<Integer>(pre[index.get()]);
 			index.set(index.get()+1);
 
 			newNode.left = _makeTreeFromPreOrderRec(pre, index, newNode.data,min);
@@ -942,7 +847,7 @@ public class Tree<Type> {
 			return null;
 		}
 	}
-	public Node<Integer> makeTreeFromPreOrderRec(int [] pre) {
+	public TreeNode<Integer> makeTreeFromPreOrderRec(int [] pre) {
 		//Other approach O(n^2) recursion: root : all less than root is left AND rest is right.
 		// Iterative O(n) :
         AtomicReference<Integer> index = new AtomicReference<Integer>();
@@ -952,17 +857,17 @@ public class Tree<Type> {
 		else
 			return null;
 	}
-	public Node<Integer> makeTreeFromPreOrderIter(int [] pre) {
+	public TreeNode<Integer> makeTreeFromPreOrderIter(int [] pre) {
 		if(pre.length == 0 )
 			return null;
 
 		int index = 0;
-		Node<Integer> root = new Node<Integer>(pre[index++]);
-		Stack<Node<Integer>> stk = new Stack<Node<Integer>>();
+		TreeNode<Integer> root = new TreeNode<Integer>(pre[index++]);
+		Stack<TreeNode<Integer>> stk = new Stack<TreeNode<Integer>>();
 		stk.push(root);
 		while(index < pre.length)
 		{
-			Node<Integer> newNode = new Node<Integer>(pre[index]);
+			TreeNode<Integer> newNode = new TreeNode<Integer>(pre[index]);
 			if(pre[index] < stk.peek().data)
 			{
 				 stk.peek().left = newNode;
@@ -970,7 +875,7 @@ public class Tree<Type> {
 			}
 			else
 			{
-				Node<Integer> popedNode = null;
+				TreeNode<Integer> popedNode = null;
 				while(!stk.isEmpty() && stk.peek().data < pre[index] )
 				{
 					popedNode = stk.pop();
@@ -986,36 +891,36 @@ public class Tree<Type> {
 
 		return root;
 	}
-	public void convertToDoubleTree(Node<Integer> root) {
+	public void convertToDoubleTree(TreeNode<Integer> root) {
 		if(root!=null)
 		{
-			Node<Integer> remNode = root.left;
-			Node<Integer> newNode = new Node<Integer>(root.data);
+			TreeNode<Integer> remNode = root.left;
+			TreeNode<Integer> newNode = new TreeNode<Integer>(root.data);
 			root.left = newNode;
 			newNode.left = remNode;
 			convertToDoubleTree(remNode);
 			convertToDoubleTree(root.right);
 		}
 	}
-	private boolean _isFoldableTree(Node<Type> root1,Node<Type> root2) {
+	private boolean _isFoldableTree(TreeNode<Type> root1, TreeNode<Type> root2) {
 		if(root1 == null && root2 == null)
 			return true;
 		if(root1!=null && root2!=null )
 			return _isFoldableTree(root1.left, root2.right) && _isFoldableTree(root1.right, root2.left);
 		return false;
 	}
-	public boolean isFoldableTree(Node<Type> root)
+	public boolean isFoldableTree(TreeNode<Type> root)
 	{
 		return _isFoldableTree(root, root);
 	}
-	public void connectNodesAtSameLevelIterr(Node<Type> root) {
-		Queue<Node<Type>> queue = new LinkedList<Node<Type>>();
+	public void connectNodesAtSameLevelIterr(TreeNode<Type> root) {
+		Queue<TreeNode<Type>> queue = new LinkedList<TreeNode<Type>>();
 		queue.add(root);
 		queue.add(null);
-		Node<Type> preRemovedNode = null;
+		TreeNode<Type> preRemovedNode = null;
 		while(!queue.isEmpty())
 		{
-			Node<Type> removedNoded = queue.remove();
+			TreeNode<Type> removedNoded = queue.remove();
 			if(removedNoded == null) // dummy node for indentifying a level
 			{
 				if(!queue.isEmpty())
@@ -1033,11 +938,11 @@ public class Tree<Type> {
 			preRemovedNode =  removedNoded;
 		}
 	}
-	private Node<Type> _sortedArrayToBalancedBST(Integer [] arr,int start ,int end) {
+	private TreeNode<Type> _sortedArrayToBalancedBST(Integer [] arr, int start , int end) {
 		if(start > end)
 			return null;
 		int mid = ( start + end )/2;
-		Node<Type> newNode = new Node(arr[mid]);
+		TreeNode<Type> newNode = new TreeNode(arr[mid]);
 		newNode.left = _sortedArrayToBalancedBST(arr, start, mid-1);
 		newNode.right = _sortedArrayToBalancedBST(arr, mid+1, end);
 		return newNode;
@@ -1046,12 +951,12 @@ public class Tree<Type> {
 	{
 		this.root =  _sortedArrayToBalancedBST(arr,0,arr.length-1);
 	}
-	private Node<Type> _sortedArrayToCompleteBST(Integer [] arr,int start ,int end) {
+	private TreeNode<Type> _sortedArrayToCompleteBST(Integer [] arr, int start , int end) {
 		if(start > end)
 			return null;
 		if(start == end)
 		{
-			Node<Type> newNode = new Node(arr[start]);
+			TreeNode<Type> newNode = new TreeNode(arr[start]);
 			return newNode;
 		}
 
@@ -1071,7 +976,7 @@ public class Tree<Type> {
 
 		int mid = start + left;
 
-		Node<Type> newNode = new Node(arr[mid]);
+		TreeNode<Type> newNode = new TreeNode(arr[mid]);
 		newNode.left = _sortedArrayToCompleteBST(arr, start, mid-1);
 		newNode.right = _sortedArrayToCompleteBST(arr, mid+1, end);
 		return newNode;
@@ -1082,22 +987,22 @@ public class Tree<Type> {
 	}
 	
 	// recurssion with multi return type
-	private Node<Type>[]  _connectInOrderSuccessorLink(Node<Type> root) {	// Every node returning min' and max'and link is made.
+	private TreeNode<Type>[]  _connectInOrderSuccessorLink(TreeNode<Type> root) {	// Every node returning min' and max'and link is made.
 		if(root==null)
 		{
-			Node<Type> [] arr = new Node[2];
+			TreeNode<Type>[] arr = new TreeNode[2];
 			arr[0] = null;	arr[1] = null;
 			return arr;
 		}
 
-		Node<Type> [] arrToRet = new Node[2];
+		TreeNode<Type>[] arrToRet = new TreeNode[2];
 		if(root.left == null)
 		{
 			arrToRet[0] = root;
 		}
 		else
 		{
-			Node<Type> [] leftRet = _connectInOrderSuccessorLink(root.left);
+			TreeNode<Type>[] leftRet = _connectInOrderSuccessorLink(root.left);
 			leftRet[1].inOrdSucc = root;
 			arrToRet[0] = leftRet[0];
 		}
@@ -1107,27 +1012,27 @@ public class Tree<Type> {
 		}
 		else
 		{
-			Node<Type> [] rightRet =  _connectInOrderSuccessorLink(root.right);
+			TreeNode<Type>[] rightRet =  _connectInOrderSuccessorLink(root.right);
 			root.inOrdSucc = rightRet[0];
 			arrToRet[1] = rightRet[1];
 		}
 		return arrToRet;
 	}
 	// recurssion with global variable
-	private void __connectInOrderSuccessorLink(Node<Type> root, AtomicReference<Node<Type>> prev) {
+	private void __connectInOrderSuccessorLink(TreeNode<Type> root, AtomicReference<TreeNode<Type>> prev) {
 //		if(root == null) return;
 //		__connectInOrderSuccessorLink(root.left, prev);
 //		if (prev.get()!=null) prev.get().inOrdSucc = root;
 //		prev.get() = root;
 //		__connectInOrderSuccessorLink(root.right, prev);
 	}
-	public void connectInOrderSuccessorLink(Node<Type> root) {
+	public void connectInOrderSuccessorLink(TreeNode<Type> root) {
 //		//_connectInOrderSucessorLink(root); // own
 //	        AtomicReference<Node<Type>> prev = new AtomicReference<Node<Type>>();
 //		prev.set(null);
 //		__connectInOrderSuccessorLink(root, holder);
 	}
-	private void _verticalSum(Node<Integer> root, int where, ds.linkedlist.doubly.Node<Integer> node, DoublyLinkedList<Integer> dLL ) {
+	private void _verticalSum(TreeNode<Integer> root, int where, ds.linkedlist.doubly.Node<Integer> node, DoublyLinkedList<Integer> dLL ) {
 		if(root == null)
 			return;
 		if( node ==  null )
@@ -1150,7 +1055,7 @@ public class Tree<Type> {
 		_verticalSum(root.left, -1 , node.prev, dLL);
 		_verticalSum(root.right, 1 , node.next, dLL);
 	}
-	public  void verticalSum(Node<Integer> root) {
+	public  void verticalSum(TreeNode<Integer> root) {
 		DoublyLinkedList<Integer> dLL = new DoublyLinkedList<Integer>();
 		_verticalSum(root,0,null,dLL);
 		ds.linkedlist.doubly.Node<Integer> iter = dLL.head;
@@ -1160,7 +1065,7 @@ public class Tree<Type> {
 			iter = iter.next;
 		}
 	}
-	private void _makeWithArr(Node<Integer> root,int [] arr,AtomicReference<Integer> index) {
+	private void _makeWithArr(TreeNode<Integer> root, int [] arr, AtomicReference<Integer> index) {
 		if(root!= null)
 		{
 			_makeWithArr(root.left,arr,index);
@@ -1169,7 +1074,7 @@ public class Tree<Type> {
 			_makeWithArr(root.right,arr,index);
 		}
 	}
-	private void _fillArray(Node<Integer> root,int [] arr,AtomicReference<Integer> index) {
+	private void _fillArray(TreeNode<Integer> root, int [] arr, AtomicReference<Integer> index) {
 		if(root!= null)
 		{
 			_fillArray(root.left,arr,index);
@@ -1178,8 +1083,8 @@ public class Tree<Type> {
 			_fillArray(root.right,arr,index);
 		}
 	}
-	public void convertToBST(Node<Integer> root) {
-		int size = this.size((Node<Type>) root);
+	public void convertToBST(TreeNode<Integer> root) {
+		int size = this.size((TreeNode<Type>) root);
 		int []arr = new int[size];
         AtomicReference<Integer> index = new AtomicReference<Integer>();
 		index.set(0);
@@ -1188,7 +1093,7 @@ public class Tree<Type> {
 		index.set(0);
 		_makeWithArr(root, arr, index);
 	}
-	private void _binaryTreeToDLLInPlace(Node<Type> root,AtomicReference<Node<Type>> toLink) {
+	private void _binaryTreeToDLLInPlace(TreeNode<Type> root, AtomicReference<TreeNode<Type>> toLink) {
 		if (root == null)
 			return;
 		_binaryTreeToDLLInPlace(root.right, toLink);
@@ -1198,8 +1103,8 @@ public class Tree<Type> {
 		toLink.set(root);
 		_binaryTreeToDLLInPlace(root.left, toLink);
 	}
-	public Node<Type> binaryTreeToDLLInPlace(Node<Type> root) {
-        AtomicReference<Node<Type>> toLink = new AtomicReference<Node<Type>>();
+	public TreeNode<Type> binaryTreeToDLLInPlace(TreeNode<Type> root) {
+        AtomicReference<TreeNode<Type>> toLink = new AtomicReference<TreeNode<Type>>();
         toLink.set(null);
 		_binaryTreeToDLLInPlace(root, toLink);
 		return toLink.get();
